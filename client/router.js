@@ -1,7 +1,16 @@
 Router.configure({
   onBeforeAction: function() {
-    AccountsEntry.signInRequired(this)
-    this.next()
+    var _this = this
+    requireLogin()
+    this.next && this.next()
+
+    function requireLogin() {
+      var exceptedRoutes = ['sign-in', 'sign-up', 'forgot-password']
+      var path = Router.current().route.path()
+      if (!_(exceptedRoutes).contains(path)) {
+        AccountsEntry.signInRequired(_this)
+      }
+    }
   }
 })
 

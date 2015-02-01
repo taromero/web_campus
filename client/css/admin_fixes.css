@@ -1,0 +1,4 @@
+.small-box > .small-box-footer { 
+  /*Prevent icon/footer overlap */
+  padding: 1px 0 !important;
+}
