@@ -1,6 +1,5 @@
 AdminConfig = {
   name: 'Web Campus',
-  adminEmails: ['canotto90@gmail.com'],
   autoForm: {
     omitFields: ['created_at', 'updated_at', 'created_by', 'last_updated_by']
   },
@@ -13,7 +12,8 @@ AdminConfig = {
     },
     Classes: {
       icon: 'university',
-      color: 'maroon'
+      color: 'maroon',
+      tableColumns: Classes.autoTable
     },
     Courses: {
       icon: 'group',
