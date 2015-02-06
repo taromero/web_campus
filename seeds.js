@@ -30,6 +30,6 @@ function createSampleTeacher(i) {
     email: 'canotto90+teacher' + i + '@gmail.com',
     password: '1234'
   })
-  Roles.addUsersToRoles(teacher, ['admin', 'directive'])
+  Roles.addUsersToRoles(teacher, ['admin', 'teacher'])
 }
 
