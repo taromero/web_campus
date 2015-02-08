@@ -7,7 +7,7 @@ Collections.forEach(function(collection) {
         return;
       }
       if (hasDefinedAbilities(role, collection, 'anyFind')) {
-        return RoleAbilities[role].abilities[collection._name].anyFind(user, selector)
+        return RoleAbilities[role].abilities[collection.name].anyFind(user, selector)
       } else {
         selector._id = 'prevent_find'
       }
@@ -20,7 +20,7 @@ Collections.forEach(function(collection) {
         return;
       }
       if (hasDefinedAbilities(role, collection, 'save')) {
-        return RoleAbilities[role].abilities[collection._name].save(user, doc)
+        return RoleAbilities[role].abilities[collection.name].save(user, doc)
       } else {
         throw 'User not allowed to insert'
       }
@@ -30,7 +30,7 @@ Collections.forEach(function(collection) {
 
 function hasDefinedAbilities(role, collection, operation) {
   return RoleAbilities[role] && RoleAbilities[role].abilities &&
-    RoleAbilities[role].abilities[collection._name] &&
-    RoleAbilities[role].abilities[collection._name][operation]
+    RoleAbilities[role].abilities[collection.name] &&
+    RoleAbilities[role].abilities[collection.name][operation]
 }
 

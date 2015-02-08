@@ -1,26 +1,21 @@
-var collectionNames = [
-  'Classes',
-  'Courses',
-  'Classes',
-  'Reports',
-  'Exams',
-  'Users'
-]
-
-collectionNames.forEach(function(collectionName) {
-  var hideCreateButtonInterval = setInterval(function() {
-    var selector = '[href="/admin/' + collectionName + '/new"]'
-    if ($(selector).length) {
-      clearInterval(hideCreateButtonInterval)
+var intervals = []
+var interval = setInterval(function() {
+  var stopIntervalSelector = '[href="/admin/Classes/new"]'
+  if ($(stopIntervalSelector).length) {
+    clearInterval(interval)
+    Collections.forEach(function(collection) {
+      var selector = '[href="/admin/' + collection.name + '/new"]'
       provideUserAndRole(Meteor.userId(), function(user, role) {
         if (role == 'directive') {
           return;
         }
-        if (!(RoleAbilities[role].abilities.classes.save && RoleAbilities[role].abilities.classes.save(user))) {
+        if (!(RoleAbilities[role].abilities[collection.name] &&
+              RoleAbilities[role].abilities[collection.name].save &&
+              RoleAbilities[role].abilities[collection.name].save(user))) {
           $(selector).hide()
         }
       })
-    }
-  }, 100)
-})
+    })
+  }
+}, 100)
 
