@@ -12,6 +12,7 @@ AdminConfig = {
     Subjects: {
       icon: 'university',
       color: 'maroon',
+      auxCollections: [Courses],
       tableColumns: Subjects.autoTable
     },
     Courses: {
