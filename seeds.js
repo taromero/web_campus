@@ -18,8 +18,8 @@ Seed = {
 function createSampleDirective(i) {
   var directive = Accounts.createUser({
     username: 'aDirective' + i,
-    email: 'canotto90+directive' + i + '@gmail.com',
-    password: '1234'
+    email: 'd' + i + '@m.com',
+    password: '1'
   })
   Roles.addUsersToRoles(directive, ['admin', 'directive'])
 }
@@ -27,8 +27,8 @@ function createSampleDirective(i) {
 function createSampleTeacher(i) {
   var teacher = Accounts.createUser({
     username: 'aTeacher' + i,
-    email: 'canotto90+teacher' + i + '@gmail.com',
-    password: '1234'
+    email: 't' + i + '@m.com',
+    password: '1'
   })
   Roles.addUsersToRoles(teacher, ['admin', 'teacher'])
 }
