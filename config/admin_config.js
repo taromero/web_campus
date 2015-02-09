@@ -7,7 +7,6 @@ AdminConfig = {
     Exams: {
       icon: 'mortar-board',
       color: 'green',
-      auxCollections: ['Courses'],
       tableColumns: Exams.autoTable
     },
     Subjects: {
