@@ -10,10 +10,10 @@ AdminConfig = {
       auxCollections: ['Courses'],
       tableColumns: Exams.autoTable
     },
-    Classes: {
+    Subjects: {
       icon: 'university',
       color: 'maroon',
-      tableColumns: Classes.autoTable
+      tableColumns: Subjects.autoTable
     },
     Courses: {
       icon: 'group',

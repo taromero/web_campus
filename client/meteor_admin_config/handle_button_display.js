@@ -1,6 +1,6 @@
 var intervals = []
 var interval = setInterval(function() {
-  var stopIntervalSelector = '[href="/admin/Classes/new"]'
+  var stopIntervalSelector = '[href="/admin/Subjects/new"]'
   if ($(stopIntervalSelector).length) {
     clearInterval(interval)
     Collections.forEach(function(collection) {
