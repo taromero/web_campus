@@ -7,6 +7,7 @@ AdminConfig = {
     Exams: {
       icon: 'mortar-board',
       color: 'green',
+      auxCollections: [Subjects],
       tableColumns: Exams.autoTable
     },
     Subjects: {
@@ -23,6 +24,10 @@ AdminConfig = {
     Reports: {
       icon: 'bar-chart',
       color: 'antiquewhite'
+    },
+    ExamScores: {
+      auxCollections: [Meteor.users, Exams],
+      tableColumns: ExamScores.autoTable
     }
   }
 };
