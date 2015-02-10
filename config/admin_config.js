@@ -13,7 +13,7 @@ AdminConfig = {
     Subjects: {
       icon: 'university',
       color: 'maroon',
-      auxCollections: [Courses],
+      auxCollections: [Meteor.users, Courses],
       tableColumns: Subjects.autoTable
     },
     Courses: {
