@@ -19,6 +19,9 @@ Router.configure({
       var collection_name = path_parts.pop()
       if (_(['new', 'edit']).contains(operation)) {
         provideUserAndRole(Meteor.userId(), function(user, role) {
+          if (role == 'directive') {
+            return;
+          }
           if (!(RoleAbilities[role].abilities[collection_name].save && RoleAbilities[role].abilities[collection_name].save(user))) {
             _this.redirect('/')
           }
