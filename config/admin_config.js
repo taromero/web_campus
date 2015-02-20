@@ -31,3 +31,6 @@ AdminConfig = {
     }
   }
 };
+
+AdminDashboard.addSidebarItem('Custom View', AdminDashboard.path('/../mat'), { icon: 'plus' })
+

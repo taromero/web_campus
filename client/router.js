@@ -34,3 +34,7 @@ Router.configure({
 Router.route('/', function() {
   this.redirect('/admin')
 })
+
+Router.route('mat', function() {
+  this.render('teacher_view')
+})

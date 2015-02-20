@@ -17,8 +17,8 @@ Seed = {
       courses: function() {
         range.forEach(Courses.iterableSample)
       },
-      subjects: function(teacher_id, courses_ids) {
-        range.forEach(Subjects.iterableSample(teacher_id, courses_ids))
+      subjects: function(teacher_id, course_id) {
+        range.forEach(Subjects.iterableSample(teacher_id, course_id))
       },
       exams: function(subject_id) {
         range.forEach(Exams.iterableSample(subject_id))
