@@ -1,4 +1,14 @@
 <template name='teacher_view'>
+  <nav>
+    <a href="#!" class="brand-logo hide-on-med-and-down">Web Campus</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/admin">Admin UI</a></li>
+    </ul>
+    <ul id="slide-out" class="side-nav">
+      <li><a href="/admin">Admin UI</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  </nav>
   <link rel='stylesheet' type='text/css' href='materialize/css/materialize.min.css'/>
   <ul class="collapsible" data-collapsible="expandable">
     {{#each courses}}

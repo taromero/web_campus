@@ -1,8 +1,6 @@
 Meteor.startup(function() {
   AccountsEntry.config({
-    dashboardRoute: '/admin',
-    passwordSignupFields: 'EMAIL_ONLY',
-    showSignupCode: true
+    signupCode: 'enigma_secret_sdfw4rasdfg'
   })
   if (Meteor.users.find().count() <= 0) {
     Seed.create(1).directives()

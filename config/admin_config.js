@@ -1,5 +1,8 @@
 AdminConfig = {
   name: 'Web Campus',
+  dashboard: {
+    homeUrl: '/mat'
+  },
   autoForm: {
     omitFields: ['created_at', 'updated_at', 'created_by', 'last_updated_by']
   },
@@ -31,6 +34,4 @@ AdminConfig = {
     }
   }
 };
-
-AdminDashboard.addSidebarItem('Custom View', AdminDashboard.path('/../mat'), { icon: 'plus' })
 

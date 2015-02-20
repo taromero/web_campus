@@ -11,12 +11,19 @@ Template.teacher_view.helpers({
 })
 
 Template.teacher_view.rendered = function() {
-  initializeComponents()
-  setTimeout(initializeComponents, 500)
-  setTimeout(initializeComponents, 1500)
+  $('ul.tabs').tabs()
+  $(".button-collapse").sideNav({ closeOnClick: true })
+  initializeCollapsibleWhenReady()
+
+  // sometimes it didn't initialized correctly for timing issue that I don't fully understand
+  function initializeCollapsibleWhenReady() {
+    var collapsibleInitialized = false
+    $('.collapsible').hover(function() {
+      if (!collapsibleInitialized) {
+        $('.collapsible').collapsible()
+        collapsibleInitialized = true
+      }
+    })
+  }
 }
 
-function initializeComponents() {
-  $('.collapsible').collapsible()
-  $('ul.tabs').tabs();
-}
