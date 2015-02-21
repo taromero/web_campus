@@ -1,4 +1,10 @@
 <template name='teacher_view'>
+  <link rel='stylesheet' type='text/css' href='materialize/css/materialize.min.css'/>
+  {{> custom_view_header}}
+  {{> courses_accordion}}
+</template>
+
+<template name='custom_view_header'>
   <nav>
     <a href="#!" class="brand-logo hide-on-med-and-down">Web Campus</a>
     <ul class="right hide-on-med-and-down">
@@ -9,60 +15,65 @@
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </nav>
-  <link rel='stylesheet' type='text/css' href='materialize/css/materialize.min.css'/>
+</template>
+
+<template name='courses_accordion'>
   <ul class="collapsible" data-collapsible="expandable">
     {{#each courses}}
-    <li>
-      <div class="collapsible-header"><i class="mdi-action-account-balance"></i>{{name}}</div>
-      <div class="collapsible-body">
-        <div class="row">
-          <div class="col s12">
-            <ul class="tabs">
-              <li class="tab col s3"><a class='active' href="#subjects{{_id}}">Subjects<i class="mdi-action-account-balance"></i></a></li>
-              <li class="tab col s3"><a href="#students{{_id}}">Students<i class="mdi-action-account-box"></i></a></li>
-                          <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
-            </ul>
-          </div>
-          <div id="subjects{{_id}}" class="col s12">
-            <ul class="collapsible" data-collapsible="expandable">
-              {{#each courseSubjects _id}}
-                <li>
-                  <div class="collapsible-header"><i class="mdi-action-class"></i>{{name}}</div>
-                  <div class="collapsible-body">
-                    <div class="row">
-                      <div class="col s12">
-                        <ul class="tabs">
-                          <li class="tab col s3"><a class='active' href="#exams{{_id}}">Exams<i class="mdi-content-content-paste"></i></a></li>
-                          <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
-                          <li class="tab col s3"><a href="#resources{{_id}}">Resources<i class="mdi-action-description"></i></a></li>
-                        </ul>
-                      </div>
-                      <div id="exams{{_id}}" class="col s12">
-                        <ul class="collapsible" data-collapsible="expandable">
-                          {{#each subjectExams _id}}
-                            <li>
-                              <div class="collapsible-header"><i class="mdi-content-content-paste"></i>{{title}}</div>
-                              <div class="collapsible-body">
-                                {{description}}
-                              </div>
-                            </li>
-                          {{/each}}
-                        </ul>
-                      </div>
-                      <div id="notifications{{_id}}" class="col s12">Notifications</div>
-                      <div id="resources{{_id}}" class="col s12">Test 3</div>
-                    </div>
-                  </div>
-                </li>
-              {{/each}}
-            </ul>
-          </div>
-          <div id="students{{_id}}" class="col s12">{{name}}</div>
-          <div id="notifications{{_id}}" class="col s12">Notifications</div>
-        </div>
-      </div>
-    </li>
+      {{> course_item}}
     {{/each}}
   </ul>
-  <a class='waves-effect waves-light btn'>Stuff</a>
+</template>
+
+<template name='course_item'>
+  <li>
+    <div class="collapsible-header"><i class="mdi-action-account-balance"></i>{{name}}</div>
+    <div class="collapsible-body">
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs">
+            <li class="tab col s3"><a class='active' href="#subjects{{_id}}">Subjects<i class="mdi-action-account-balance"></i></a></li>
+            <li class="tab col s3"><a href="#students{{_id}}">Students<i class="mdi-action-account-box"></i></a></li>
+            <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
+          </ul>
+        </div>
+        <div id="subjects{{_id}}" class="col s12">
+          <ul class="collapsible" data-collapsible="expandable">
+            {{#each courseSubjects _id}}
+              <li>
+                <div class="collapsible-header"><i class="mdi-action-class"></i>{{name}}</div>
+                <div class="collapsible-body">
+                  <div class="row">
+                    <div class="col s12">
+                      <ul class="tabs">
+                        <li class="tab col s3"><a class='active' href="#exams{{_id}}">Exams<i class="mdi-content-content-paste"></i></a></li>
+                        <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
+                        <li class="tab col s3"><a href="#resources{{_id}}">Resources<i class="mdi-action-description"></i></a></li>
+                      </ul>
+                    </div>
+                    <div id="exams{{_id}}" class="col s12">
+                      <ul class="collapsible" data-collapsible="expandable">
+                        {{#each subjectExams _id}}
+                          <li>
+                            <div class="collapsible-header"><i class="mdi-content-content-paste"></i>{{title}}</div>
+                            <div class="collapsible-body">
+                              {{description}}
+                            </div>
+                          </li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                    <div id="notifications{{_id}}" class="col s12">Notifications</div>
+                    <div id="resources{{_id}}" class="col s12">Test 3</div>
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <div id="students{{_id}}" class="col s12">{{name}}</div>
+        <div id="notifications{{_id}}" class="col s12">Notifications</div>
+      </div>
+    </div>
+  </li>
 </template>
