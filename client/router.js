@@ -32,9 +32,6 @@ Router.configure({
 })
 
 Router.route('/', function() {
-  this.redirect('/admin')
+  this.render('custom_view')
 })
 
-Router.route('mat', function() {
-  this.render('teacher_view')
-})

@@ -1,7 +1,7 @@
 AdminConfig = {
   name: 'Web Campus',
   dashboard: {
-    homeUrl: '/mat'
+    homeUrl: '/'
   },
   autoForm: {
     omitFields: ['created_at', 'updated_at', 'created_by', 'last_updated_by']
