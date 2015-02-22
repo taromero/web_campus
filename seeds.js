@@ -41,15 +41,18 @@ var createUser  = {
     createUser._createUser(i, 'aParent', 'p', 'parent')
   },
   student: function(i) {
-    createUser._createUser(i, 'aStudent', 's', 'student')
+    var student_id = createUser._createUser(i, 'aStudent', 's', 'student')
+    Meteor.users.update(student_id, { $set: { course_id: Courses.findOne()._id }})
   },
   _createUser: function(i, username, email_prefix, role) {
-    var directive = Accounts.createUser({
+    var user_id = Accounts.createUser({
       username: username + i,
       email: email_prefix + i + '@m.com',
       password: '1'
     })
-    Roles.addUsersToRoles(directive, ['admin', role])
+    Roles.addUsersToRoles(user_id, ['admin', role])
+    Meteor.users.update(user_id, { $set: { profile: Schemas.UserProfile.iterableSample(i) } })
+    return user_id
   }
 }
 

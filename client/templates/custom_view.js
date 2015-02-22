@@ -4,6 +4,10 @@ Template.courses_accordion.helpers({
   }
 })
 
+Template.courses_accordion.rendered = function() {
+  $('.modal-trigger').leanModal()
+}
+
 Template.course_item.helpers({
   courseSubjects: function(courseId) {
     return Subjects.find({ course_id: courseId })
@@ -19,9 +23,12 @@ Template.course_item.helpers({
     })
   },
   courseStudents: function(courseId) {
-    var aux = Meteor.users.find({ course_id: courseId }).fetch().filter(onlyStudents)
-    console.log(aux)
-    return aux
+    return Meteor.users.find({ course_id: courseId }).fetch()
+            .filter(onlyStudents)
+            .map(function(user) {
+              user.email = user.emails[0]
+              return user
+            })
 
     function onlyStudents(user) {
       return _(user.roles).contains('student')
