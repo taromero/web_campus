@@ -10,6 +10,13 @@ Template.course_item.helpers({
   },
   subjectExams: function(subjectId) {
     return Exams.find({ subject_id: subjectId })
+  },
+  subjectResources: function(subjectId) {
+    var resources = Resources.find({ subject_id: subjectId })
+    return resources.map(function(resource) {
+      resource.filename = Files.findOne(resource.file_id).original.name
+      return resource
+    })
   }
 })
 

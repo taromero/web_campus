@@ -64,7 +64,13 @@
                       </ul>
                     </div>
                     <div id="notifications{{_id}}" class="col s12">Notifications</div>
-                    <div id="resources{{_id}}" class="col s12">Test 3</div>
+                    <div id="resources{{_id}}" class="col s12">
+                      <div class="collection">
+                        {{#each subjectResources _id}}
+                        <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="collection-item">{{filename}}</a>
+                        {{/each}}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </li>

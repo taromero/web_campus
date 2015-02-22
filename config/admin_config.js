@@ -31,6 +31,9 @@ AdminConfig = {
     ExamScores: {
       auxCollections: [Meteor.users, Exams],
       tableColumns: ExamScores.autoTable
+    },
+    Resources: {
+      tableColumns: Resources.autoTable
     }
   }
 };
