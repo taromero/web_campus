@@ -2,6 +2,7 @@ Router.configure({
   onBeforeAction: function() {
     var _this = this
     requireLogin()
+    onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
     this.next && this.next()
 
@@ -10,6 +11,16 @@ Router.configure({
       var path = window.location.pathname
       if (!_(exceptedRoutes).contains(path)) {
         AccountsEntry.signInRequired(_this)
+      }
+    }
+
+    function onlyAllowDirectivesAndTeachersOnAdmin() {
+      if (_(window.location.pathname.split('/')).contains('admin')) {
+        provideUserAndRole(Meteor.userId(), function(user, role) {
+          if (!_(['directive', 'teacher']).contains(role)) {
+            _this.redirect('/')
+          }
+        })
       }
     }
 
@@ -23,7 +34,7 @@ Router.configure({
             return;
           }
           if (!(RoleAbilities[role].abilities[collection_name].save && RoleAbilities[role].abilities[collection_name].save(user))) {
-            _this.redirect('/')
+            _this.redirect('/admin')
           }
         })
       }
@@ -32,5 +43,10 @@ Router.configure({
 })
 
 Router.route('/', function() {
-  this.redirect('/admin')
+  this.render('custom_view')
+  this.waitOn = function() {
+    // don't know why autopublish only publish username and _id for users
+    return [Meteor.subscribe('users')]
+  }
 })
+

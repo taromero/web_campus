@@ -1,5 +1,8 @@
 AdminConfig = {
   name: 'Web Campus',
+  dashboard: {
+    homeUrl: '/'
+  },
   autoForm: {
     omitFields: ['created_at', 'updated_at', 'created_by', 'last_updated_by']
   },
@@ -28,6 +31,10 @@ AdminConfig = {
     ExamScores: {
       auxCollections: [Meteor.users, Exams],
       tableColumns: ExamScores.autoTable
+    },
+    Resources: {
+      tableColumns: Resources.autoTable
     }
   }
 };
+
