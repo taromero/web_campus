@@ -65,11 +65,16 @@
                     </div>
                     <div id="notifications{{_id}}" class="col s12">Notifications</div>
                     <div id="resources{{_id}}" class="col s12">
-                      <div class="collection">
+                      <ul class="collection">
                         {{#each subjectResources _id}}
-                        <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="collection-item">{{filename}}</a>
+                          <li class='collection-item teal'>
+                          <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
+                              <i class="mdi-file-file-download"></i>
+                            </a>
+                            <span class='white-text'> Uploaded: {{formatDate createdAt}} </span>
+                          </li>
                         {{/each}}
-                      </div>
+                      </ul>
                     </div>
                   </div>
                 </div>
