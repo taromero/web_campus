@@ -44,5 +44,9 @@ Router.configure({
 
 Router.route('/', function() {
   this.render('custom_view')
+  this.waitOn = function() {
+    // don't know why autopublish only publish username and _id for users
+    return [Meteor.subscribe('users')]
+  }
 })
 

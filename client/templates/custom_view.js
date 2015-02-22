@@ -17,6 +17,15 @@ Template.course_item.helpers({
       resource.filename = Files.findOne(resource.file_id).original.name
       return resource
     })
+  },
+  courseStudents: function(courseId) {
+    var aux = Meteor.users.find({ course_id: courseId }).fetch().filter(onlyStudents)
+    console.log(aux)
+    return aux
+
+    function onlyStudents(user) {
+      return _(user.roles).contains('student')
+    }
   }
 })
 

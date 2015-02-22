@@ -87,7 +87,18 @@
             {{/each}}
           </ul>
         </div>
-        <div id="students{{_id}}" class="col s12">{{name}}</div>
+        <div id="students{{_id}}" class="col s12">
+          <ul class="collapsible" data-collapsible="expandable">
+            {{#each courseStudents _id}}
+              <li>
+                <div class="collapsible-header"><i class="mdi-action-account-box"></i>{{username}}</div>
+                <div class="collapsible-body">
+                  {{_id}}
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+          </div>
         <div id="notifications{{_id}}" class="col s12">Notifications</div>
       </div>
     </div>
