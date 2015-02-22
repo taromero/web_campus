@@ -25,7 +25,15 @@ Template.course_item.helpers({
 // course_item template) it doesn't work sometimes.
 Template.course_item.rendered = function() {
   $('.collapsible').collapsible()
-  $('ul.tabs').tabs()
-  $(".button-collapse").sideNav({ closeOnClick: true })
+  // Workaround to avoid run condition between meteor and materialize
+  // unbind and bind to prevent multiple bindings to the same event handler
+  $('.collapsible-header').unbind('click.initializetabs').bind('click.initializetabs', initializeTabs)
+
+  function initializeTabs() {
+    $(this).siblings('.collapsible-body').find('ul.tabs').first().tabs()
+  }
 }
 
+Template.custom_view_header.rendered = function() {
+  $(".button-collapse").sideNav({ closeOnClick: true })
+}
