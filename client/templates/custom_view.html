@@ -8,13 +8,18 @@
   <nav>
     <a href="#!" class="brand-logo hide-on-med-and-down">Web Campus</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="/admin">Admin UI</a></li>
+      {{> header_links}}
     </ul>
     <ul id="slide-out" class="side-nav">
-      <li><a href="/admin">Admin UI</a></li>
+      {{> header_links}}
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   </nav>
+</template>
+
+<template name='header_links'>
+  <li {{showIf adminAllowed}}><a href="/admin">Admin UI</a></li>
+  <li><a href="/sign-out">Sign Out</a></li>
 </template>
 
 <template name='courses_accordion'>
