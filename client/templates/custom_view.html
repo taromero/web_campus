@@ -93,36 +93,7 @@
               <li>
                 <a href='#modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{username}}</a>
               </li>
-              <div id="modal{{_id}}" class="modal">
-                <div class="modal-content teal lighten-2 white-text">
-                  <h4 class='flow-text'>{{profile.firstName}} {{profile.lastName}}</h4>
-                  <div class='container'>
-                    <div class='row'>
-                      <div class='col s6'>Email</div>
-                      <div class='col s6'>{{email.address}}</div>
-                    </div>
-                    <div class='row'>
-                      <div class='col s6'>DNI</div>
-                      <div class='col s6'>{{profile.document_id}}</div>
-                    </div>
-                    <div class='row'>
-                      <div class='col s6'>Birthday</div>
-                      <div class='col s6'>{{formatDate profilebirthday}}</div>
-                    </div>
-                    <div class='row'>
-                      <div class='col s6'>Gender</div>
-                      <div class='col s6'>{{profile.gender}}</div>
-                    </div>
-                    <div class='row'>
-                      <div class='col s6'>Phone Number</div>
-                      <div class='col s6'>{{profile.phoneNumber}}</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Dismiss</a>
-                </div>
-              </div>
+              {{> student_modal student=this}}
             {{/each}}
           </ul>
         </div>
@@ -130,4 +101,39 @@
       </div>
     </div>
   </li>
+</template>
+
+<template name='student_modal'>
+  {{#with student}}
+    <div id="modal{{_id}}" class="modal">
+      <div class="modal-content teal lighten-2 white-text">
+        <h4 class='flow-text'>{{profile.firstName}} {{profile.lastName}}</h4>
+        <div class='container'>
+          <div class='row'>
+            <div class='col s6'>Email</div>
+            <div class='col s6'>{{email.address}}</div>
+          </div>
+          <div class='row'>
+            <div class='col s6'>DNI</div>
+            <div class='col s6'>{{profile.document_id}}</div>
+          </div>
+          <div class='row'>
+            <div class='col s6'>Birthday</div>
+            <div class='col s6'>{{formatDate profilebirthday}}</div>
+          </div>
+          <div class='row'>
+            <div class='col s6'>Gender</div>
+            <div class='col s6'>{{profile.gender}}</div>
+          </div>
+          <div class='row'>
+            <div class='col s6'>Phone Number</div>
+            <div class='col s6'>{{profile.phoneNumber}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Dismiss</a>
+      </div>
+    </div>
+  {{/with}}
 </template>
