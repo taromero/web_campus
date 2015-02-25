@@ -1,3 +1,5 @@
 <template name='prettyDate'>
-  {{formatDateTime this.value}}
+  {{#if this.value}}
+    {{formatDateTime this.value}}
+  {{/if}}
 </template>
