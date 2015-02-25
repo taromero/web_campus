@@ -2,10 +2,10 @@ accounts-base@1.1.3
 accounts-password@1.0.6
 alanning:roles@1.2.13
 aldeed:autoform@4.2.2
-aldeed:collection2@2.3.0
-aldeed:simple-schema@1.1.0
+aldeed:collection2@2.3.2
+aldeed:simple-schema@1.3.0
+aldeed:tabular@1.0.6
 aldeed:template-extension@3.1.1
-alethes:pages@1.7.2
 anti:fake@0.4.1
 application-configuration@1.0.4
 autopublish@1.0.2
@@ -16,6 +16,7 @@ blaze@2.0.4
 blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
+canotto90:admin-1.1.0-patch@0.4.0
 cfs:access-point@0.1.43
 cfs:base-package@0.0.27
 cfs:collection@0.5.3
@@ -68,10 +69,12 @@ logging@1.0.6
 matb33:collection-hooks@0.7.6
 meteor@1.1.4
 meteor-platform@1.2.1
+meteorhacks:meteorx@1.0.2
+meteorhacks:unblock@1.1.0
 minifiers@1.1.3
 minimongo@1.0.6
 mobile-status-bar@1.0.2
-momentjs:moment@2.8.4
+momentjs:moment@2.9.0
 mongo@1.0.11
 mongo-livedata@1.0.7
 mrt:moment@2.8.1
@@ -87,6 +90,7 @@ reactive-dict@1.0.5
 reactive-var@1.0.4
 reload@1.1.2
 retry@1.0.2
+reywood:publish-composite@1.3.5
 routepolicy@1.0.4
 schnie:uploader@2.0.3
 service-configuration@1.0.3
@@ -105,5 +109,4 @@ underscore@1.0.2
 url@1.0.3
 webapp@1.1.6
 webapp-hashing@1.0.2
-yogiben:admin@1.0.9
 yogiben:autoform-file@0.2.0
