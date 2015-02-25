@@ -11,14 +11,12 @@ AdminConfig = {
       label: 'Examenes',
       icon: 'mortar-board',
       color: 'green',
-      auxCollections: [Subjects],
       tableColumns: Exams.autoTable
     },
     Subjects: {
       label: 'Materias',
       icon: 'university',
       color: 'maroon',
-      auxCollections: [Meteor.users, Courses],
       tableColumns: Subjects.autoTable
     },
     Courses: {
@@ -34,7 +32,6 @@ AdminConfig = {
     },
     ExamScores: {
       label: 'Notas',
-      auxCollections: [Meteor.users, Exams],
       tableColumns: ExamScores.autoTable
     },
     Resources: {
