@@ -1,0 +1,5 @@
+<template name='userEmail'>
+  {{#if email.address}}
+    <a class='btn btn-default btn-xs' href='/admin/Users/{{this.value}}/edit'>{{email.address}}</a>
+  {{/if}}
+</template>
