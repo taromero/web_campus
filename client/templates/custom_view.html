@@ -37,9 +37,9 @@
       <div class="row">
         <div class="col s12">
           <ul class="tabs">
-            <li class="tab col s3"><a class='active' href="#subjects{{_id}}">Subjects<i class="mdi-action-account-balance"></i></a></li>
-            <li class="tab col s3"><a href="#students{{_id}}">Students<i class="mdi-action-account-box"></i></a></li>
-            <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
+            <li class="tab col s3"><a class='active' href="#subjects{{_id}}">Materias</a></li>
+            <li class="tab col s3"><a href="#students{{_id}}">Alumnos</a></li>
+            <li class="tab col s3"><a href="#notifications{{_id}}">Notificaciones</a></li>
           </ul>
         </div>
         <div id="subjects{{_id}}" class="col s12">
@@ -51,9 +51,9 @@
                   <div class="row">
                     <div class="col s12">
                       <ul class="tabs">
-                        <li class="tab col s3"><a class='active' href="#exams{{_id}}">Exams<i class="mdi-content-content-paste"></i></a></li>
-                        <li class="tab col s3"><a href="#notifications{{_id}}">Notifications<i class="mdi-action-speaker-notes"></i></a></li>
-                        <li class="tab col s3"><a href="#resources{{_id}}">Resources<i class="mdi-action-description"></i></a></li>
+                        <li class="tab col s3"><a class='active' href="#exams{{_id}}">Examenes</a></li>
+                        <li class="tab col s3"><a href="#notifications{{_id}}">Notificaciones</a></li>
+                        <li class="tab col s3"><a href="#resources{{_id}}">Archivos</a></li>
                       </ul>
                     </div>
                     <div id="exams{{_id}}" class="col s12">
@@ -66,7 +66,7 @@
                         {{/each}}
                       </ul>
                     </div>
-                    <div id="notifications{{_id}}" class="col s12">Notifications</div>
+                    <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
                     <div id="resources{{_id}}" class="col s12">
                       <ul class="collection">
                         {{#each subjectResources _id}}
@@ -74,7 +74,7 @@
                           <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
                               <i class="mdi-file-file-download"></i>
                             </a>
-                            <span class='white-text'> Uploaded: {{formatDate createdAt}} </span>
+                            <span class='white-text'> Subido: {{formatDate createdAt}} </span>
                           </li>
                         {{/each}}
                       </ul>
@@ -95,7 +95,7 @@
             {{/each}}
           </ul>
         </div>
-        <div id="notifications{{_id}}" class="col s12">Notifications</div>
+        <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
       </div>
     </div>
   </li>
@@ -118,21 +118,17 @@
             <div class='col s6'>{{profile.document_id}}</div>
           </div>
           <div class='row'>
-            <div class='col s6'>Birthday</div>
+            <div class='col s6'>Nacimiento</div>
             <div class='col s6'>{{formatDate profilebirthday}}</div>
           </div>
           <div class='row'>
-            <div class='col s6'>Gender</div>
-            <div class='col s6'>{{profile.gender}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>Phone Number</div>
+            <div class='col s6'>Telefono</div>
             <div class='col s6'>{{profile.phoneNumber}}</div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Dismiss</a>
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
       </div>
     </div>
   {{/with}}
@@ -145,22 +141,22 @@
         <h4 class='flow-text'>{{title}}</h4>
         <div class='container'>
           <div class='row'>
-            <div class='col s6'>Title</div>
+            <div class='col s6'>Titulo</div>
             <div class='col s6'>{{title}}</div>
           </div>
           <div class='row'>
-            <div class='col s6'>Date</div>
+            <div class='col s6'>Fecha</div>
             <div class='col s6'>{{formatDate date}}</div>
           </div>
           <div class='row'>
-            <div class='col s6'>Description</div>
+            <div class='col s6'>Descripcion</div>
             <div class='col s6'>{{description}}</div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" value='{{_id}}' class="waves-effect waves-green btn-flat modal-action custom-modal-trigger">Edit Exam Notes</a>
-        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Dismiss</a>
+        <a href="#" value='{{_id}}' class="waves-effect waves-green btn-flat modal-action custom-modal-trigger">Editar Notas</a>
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
       </div>
     </div>
   {{/with}}
@@ -182,8 +178,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id='save_scores'>Save</a>
-      <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Dismiss</a>
+      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id='save_scores'>Guardar</a>
+      <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
     </div>
   </div>
 </template>
