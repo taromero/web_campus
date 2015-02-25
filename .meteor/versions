@@ -86,6 +86,7 @@ observe-sequence@1.0.4
 ordered-dict@1.0.2
 raix:eventemitter@0.1.1
 raix:handlebar-helpers@0.2.4
+raix:push@2.6.1
 random@1.0.2
 reactive-dict@1.0.5
 reactive-var@1.0.4
