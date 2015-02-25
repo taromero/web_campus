@@ -1,7 +1,9 @@
 <template name='custom_view'>
   <link rel='stylesheet' type='text/css' href='materialize/css/materialize.min.css'/>
   {{> custom_view_header}}
-  {{> courses_accordion}}
+  <div class='accordion_container' style='margin-left:1rem;margin-right:1rem'>
+    {{> courses_accordion}}
+  </div>
 </template>
 
 <template name='custom_view_header'>
