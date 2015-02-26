@@ -2,7 +2,15 @@
   <link rel='stylesheet' type='text/css' href='materialize/css/materialize.min.css'/>
   {{> custom_view_header}}
   <div class='accordion_container' style='margin-left:1rem;margin-right:1rem'>
-    {{> courses_accordion}}
+    {{#if isTeacherOrDirective}}
+      {{> courses_accordion}}
+    {{else}}
+      {{#if isParent}}
+        {{> students_accordion}}
+      {{else}}
+        {{> subjects_accordion course_id=user.course_id}}
+      {{/if}}
+    {{/if}}
   </div>
 </template>
 
@@ -24,14 +32,6 @@
   <li><a href="/sign-out">Salir</a></li>
 </template>
 
-<template name='courses_accordion'>
-  <ul class="collapsible" data-collapsible="expandable">
-    {{#each courses}}
-      {{> course_item}}
-    {{/each}}
-  </ul>
-</template>
-
 <template name='tabHeader'>
   <li class="tab col s3">
     <a class='{{class}}' href="{{href}}{{id}}">
@@ -41,156 +41,3 @@
   </li>
 </template>
 
-<template name='course_item'>
-  <li>
-    <div class="collapsible-header"><i class="mdi-action-account-balance"></i>{{name}}</div>
-    <div class="collapsible-body">
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            {{> tabHeader class='active' href="#subjects" id=_id l_label="Materias" s_label="mdi-action-class"}}
-            {{> tabHeader href="#students" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
-            {{> tabHeader href="#notifications" id=_id l_label="Notificaciones" s_label="mdi-action-announcement"}}
-          </ul>
-        </div>
-        <div id="subjects{{_id}}" class="col s12">
-          <ul class="collapsible" data-collapsible="expandable">
-            {{#each courseSubjects _id}}
-              <li>
-                <div class="collapsible-header"><i class="mdi-action-class"></i>{{name}}</div>
-                <div class="collapsible-body">
-                  <div class="row">
-                    <div class="col s12">
-                      <ul class="tabs">
-                        {{> tabHeader class='active' href="#exams" id=_id l_label="examenes" s_label="mdi-content-content-paste"}}
-                        {{> tabHeader href="#notifications" id=_id l_label="notificaciones" s_label="mdi-action-announcement"}}
-                        {{> tabHeader href="#resources" id=_id l_label="Archivos" s_label="mdi-file-file-download"}}
-                      </ul>
-                    </div>
-                    <div id="exams{{_id}}" class="col s12">
-                      <ul class="collapsible" data-collapsible="expandable">
-                        {{#each subjectExams _id}}
-                          <li>
-                            <a href='#exam_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-content-content-paste"></i>{{title}}</a>
-                          </li>
-                          {{> exam_modal exam=this}}
-                        {{/each}}
-                      </ul>
-                    </div>
-                    <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
-                    <div id="resources{{_id}}" class="col s12">
-                      <ul class="collection">
-                        {{#each subjectResources _id}}
-                          <li class='collection-item teal'>
-                          <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
-                              <i class="mdi-file-file-download"></i>
-                            </a>
-                            <span class='white-text'> Subido: {{formatDate createdAt}} </span>
-                          </li>
-                        {{/each}}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-        <div id="students{{_id}}" class="col s12">
-          <ul class="collapsible" data-collapsible="expandable">
-            {{#each courseStudents _id}}
-              <li>
-                <a href='#student_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{username}}</a>
-              </li>
-              {{> student_modal student=this}}
-            {{/each}}
-          </ul>
-        </div>
-        <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
-      </div>
-    </div>
-  </li>
-  <div id='exam-score-modal-container'>
-  </div>
-</template>
-
-<template name='student_modal'>
-  {{#with student}}
-    <div id="student_modal{{_id}}" class="modal">
-      <div class="modal-content teal lighten-2 white-text">
-        <h4 class='flow-text'>{{profile.firstName}} {{profile.lastName}}</h4>
-        <div class='container'>
-          <div class='row'>
-            <div class='col s6'>Email</div>
-            <div class='col s6'>{{email.address}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>DNI</div>
-            <div class='col s6'>{{profile.document_id}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>Nacimiento</div>
-            <div class='col s6'>{{formatDate profilebirthday}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>Telefono</div>
-            <div class='col s6'>{{profile.phoneNumber}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
-      </div>
-    </div>
-  {{/with}}
-</template>
-
-<template name='exam_modal'>
-  {{#with exam}}
-    <div id="exam_modal{{_id}}" class="modal">
-      <div class="modal-content teal lighten-2 white-text">
-        <h4 class='flow-text'>{{title}}</h4>
-        <div class='container'>
-          <div class='row'>
-            <div class='col s6'>Titulo</div>
-            <div class='col s6'>{{title}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>Fecha</div>
-            <div class='col s6'>{{formatDate date}}</div>
-          </div>
-          <div class='row'>
-            <div class='col s6'>Descripcion</div>
-            <div class='col s6'>{{description}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#" value='{{_id}}' class="waves-effect waves-green btn-flat modal-action custom-modal-trigger">Editar Notas</a>
-        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
-      </div>
-    </div>
-  {{/with}}
-</template>
-
-<template name='exam_score_modal'>
-  <div id="exam_score_modal" class="modal">
-    <div class="modal-content brown lighten-1 white-text">
-      <h4 class='flow-text'>{{exam.title}}</h4>
-      <div class='container'> 
-        {{#each students}}
-          <div class='row'>
-            <div class='col s6'>{{profile.firstName}} {{profile.lastName}}</div>
-            <div class='col s6'>
-              <input type='number' class='score' value={{examScore}} id='{{_id}}'>
-            </div>
-          </div>
-        {{/each}}
-      </div>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id='save_scores'>Guardar</a>
-      <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
-    </div>
-  </div>
-</template>
