@@ -1,0 +1,37 @@
+<template name="subject_item">
+  {{#with subject}}
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          {{> tabHeader class='active' href="#exams" id=_id l_label="examenes" s_label="mdi-content-content-paste"}}
+          {{> tabHeader href="#notifications" id=_id l_label="notificaciones" s_label="mdi-action-announcement"}}
+          {{> tabHeader href="#resources" id=_id l_label="Archivos" s_label="mdi-file-file-download"}}
+        </ul>
+      </div>
+      <div id="exams{{_id}}" class="col s12">
+        <ul class="collapsible" data-collapsible="expandable">
+          {{#each exams _id}}
+            <li>
+              <a href='#exam_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-content-content-paste"></i>{{title}}</a>
+            </li>
+            {{> exam_modal exam=this}}
+          {{/each}}
+        </ul>
+      </div>
+      <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
+      <div id="resources{{_id}}" class="col s12">
+        <ul class="collection">
+          {{#each resources _id}}
+            <li class='collection-item teal'>
+            <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
+                <i class="mdi-file-file-download"></i>
+              </a>
+              <span class='white-text'> Subido: {{formatDate createdAt}} </span>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/with}}
+</template>
+

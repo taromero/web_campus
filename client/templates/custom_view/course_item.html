@@ -1,0 +1,33 @@
+<template name='course_item'>
+  <li>
+    <div class="collapsible-header"><i class="mdi-action-account-balance"></i>{{name}}</div>
+    <div class="collapsible-body">
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs">
+            {{> tabHeader class='active' href="#subjects" id=_id l_label="Materias" s_label="mdi-action-class"}}
+            {{> tabHeader href="#students" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
+            {{> tabHeader href="#notifications" id=_id l_label="Notificaciones" s_label="mdi-action-announcement"}}
+          </ul>
+        </div>
+        <div id="subjects{{_id}}" class="col s12">
+          {{> subjects_accordion course_id=_id}}
+        </div>
+        <div id="students{{_id}}" class="col s12">
+          <ul class="collapsible" data-collapsible="expandable">
+            {{#each courseStudents _id}}
+              <li>
+                <a href='#student_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{username}}</a>
+              </li>
+              {{> student_modal student=this}}
+            {{/each}}
+          </ul>
+        </div>
+        <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
+      </div>
+    </div>
+  </li>
+  <div id='exam-score-modal-container'>
+  </div>
+</template>
+

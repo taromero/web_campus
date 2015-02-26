@@ -1,0 +1,10 @@
+<template name='subjects_accordion'>
+  <ul class="collapsible" data-collapsible="expandable">
+    {{#each subjects}}
+      <li>
+        <div class="collapsible-header"><i class="mdi-action-class"></i>{{name}}</div>
+        <div class="collapsible-body">{{> subject_item subject_id=_id}}</div>
+      </li>
+    {{/each}}
+  </ul>
+</template>
