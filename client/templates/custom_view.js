@@ -46,7 +46,13 @@ Template.course_item.rendered = function() {
   $('.collapsible-header').unbind('click.initializetabs').bind('click.initializetabs', initializeTabs)
 
   function initializeTabs() {
-    $(this).siblings('.collapsible-body').find('ul.tabs').first().tabs()
+    var that = this
+    _initializeTabs()
+    setTimeout(_initializeTabs, 200)
+
+    function _initializeTabs() {
+      $(that).siblings('.collapsible-body').find('ul.tabs').first().tabs()
+    }
   }
 }
 
