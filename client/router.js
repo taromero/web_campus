@@ -4,6 +4,9 @@ Router.configure({
     requireLogin()
     onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
+
+    attempt_for_5_seconds_to(hide_audit_on_mobile)
+
     this.next && this.next()
 
     function requireLogin() {

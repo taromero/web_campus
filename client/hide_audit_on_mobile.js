@@ -19,15 +19,16 @@ hide_audit_on_mobile = function() {
   })
 }
 
-$(function() {
-  hide_audit_on_mobile()
+attempt_for_5_seconds_to = function(fn) {
+  fn()
   var counter = 0
   var interval = setInterval(function() {
     if (counter == 10) {
       clearInterval(interval)
       return
     }
-    hide_audit_on_mobile()
+    fn()
     counter++
   }, 500)
-})
+}
+
