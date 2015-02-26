@@ -1,3 +1,29 @@
+Template.custom_view.helpers({
+  isTeacherOrDirective: function() {
+    return roleIn(['directive', 'teacher'])
+  },
+  isParent: function() {
+    return roleIn(['parent'])
+  },
+  isTeacher: function() {
+    return roleIn(['student'])
+  },
+  user: function() {
+    return Meteor.user()
+  }
+})
+
+function roleIn(roleArray) {
+  var user = Meteor.user()
+  if (user) {
+    return roleArray.some(inUserRoles)
+  }
+
+  function inUserRoles(role) {
+    return _(user.roles).contains(role)
+  }
+}
+
 Template.courses_accordion.helpers({
   courses: function() {
     return Courses.find()
@@ -9,19 +35,6 @@ Template.courses_accordion.rendered = function() {
 }
 
 Template.course_item.helpers({
-  courseSubjects: function(courseId) {
-    return Subjects.find({ course_id: courseId })
-  },
-  subjectExams: function(subjectId) {
-    return Exams.find({ subject_id: subjectId })
-  },
-  subjectResources: function(subjectId) {
-    var resources = Resources.find({ subject_id: subjectId })
-    return resources.map(function(resource) {
-      resource.filename = Files.findOne(resource.file_id).original.name
-      return resource
-    })
-  },
   courseStudents: function(courseId) {
     return Meteor.users.find({ course_id: courseId }).fetch()
             .filter(onlyStudents)
@@ -55,6 +68,38 @@ Template.course_item.rendered = function() {
     }
   }
 }
+
+Template.students_accordion.helpers({
+  students: function() {
+    return Meteor.users.find().filter(onlyStudents)
+
+    function onlyStudents(user) {
+      return _(user.roles).contains('student')
+    }
+  }
+})
+
+Template.subjects_accordion.helpers({
+  subjects: function() {
+    return Subjects.find({ course_id: this.course_id })
+  }
+})
+
+Template.subject_item.helpers({
+  subject: function() {
+    return Subjects.findOne(this.subject_id)
+  },
+  exams: function(subjectId) {
+    return Exams.find({ subject_id: subjectId })
+  },
+  resources: function(subjectId) {
+    var resources = Resources.find({ subject_id: subjectId })
+    return resources.map(function(resource) {
+      resource.filename = Files.findOne(resource.file_id).original.name
+      return resource
+    })
+  },
+})
 
 Template.custom_view_header.rendered = function() {
   $(".button-collapse").sideNav({ closeOnClick: true })
