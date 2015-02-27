@@ -2,7 +2,7 @@
   <ul class="collapsible" data-collapsible="expandable">
     {{#each students}}
       <li>
-      <div class="collapsible-header"><i class="mdi-action-account-box"></i>{{firstName}} {{lastName}}</div>
+      <div class="collapsible-header"><i class="mdi-action-account-box"></i>{{profile.lastName}}, {{profile.firstName}}</div>
       <div class="collapsible-body">{{> subjects_accordion course_id=course_id}}</div>
       </li>
     {{/each}}

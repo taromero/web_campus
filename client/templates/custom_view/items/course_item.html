@@ -17,7 +17,7 @@
           <ul class="collapsible" data-collapsible="expandable">
             {{#each courseStudents _id}}
               <li>
-                <a href='#student_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{username}}</a>
+              <a href='#student_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{profile.lastName}}, {{profile.firstName}}</a>
               </li>
               {{> student_modal student=this}}
             {{/each}}
