@@ -13,7 +13,5 @@ Template.registerHelper('showIf', function(condition) {
 });
 
 Template.registerHelper('adminAllowed', function() {
-  return provideUserAndRole(Meteor.userId(), function(user, role) {
-    return _(['directive', 'teacher']).contains(role)
-  })
+  return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
 })
