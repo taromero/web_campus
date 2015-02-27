@@ -7,6 +7,12 @@ Router.configure({
 
     attempt_for_5_seconds_to(hide_audit_on_mobile)
 
+    this.waitOn = function() {
+      return Collections.map(function(collection) {
+        return Meteor.subscribe(collection.name)
+      }).concat([Meteor.subscribe('Users')])
+    }
+
     this.next && this.next()
 
     function requireLogin() {
@@ -19,11 +25,9 @@ Router.configure({
 
     function onlyAllowDirectivesAndTeachersOnAdmin() {
       if (_(window.location.pathname.split('/')).contains('admin')) {
-        provideUserAndRole(Meteor.userId(), function(user, role) {
-          if (!_(['directive', 'teacher']).contains(role)) {
-            _this.redirect('/')
-          }
-        })
+        if (!_(['directive', 'teacher']).contains(getRole(Meteor.userId()))) {
+          _this.redirect('/')
+        }
       }
     }
 
@@ -32,14 +36,14 @@ Router.configure({
       var operation = path_parts.pop()
       var collection_name = path_parts.pop()
       if (_(['new', 'edit']).contains(operation)) {
-        provideUserAndRole(Meteor.userId(), function(user, role) {
-          if (role == 'directive') {
-            return;
-          }
-          if (!(RoleAbilities[role].abilities[collection_name].save && RoleAbilities[role].abilities[collection_name].save(user))) {
-            _this.redirect('/admin')
-          }
-        })
+        var user = Meteor.user()
+        var role = getRole(Meteor.userId())
+        if (role == 'directive') {
+          return;
+        }
+        if (!(RoleAbilities[role].abilities[collection_name].save && RoleAbilities[role].abilities[collection_name].save(user))) {
+          _this.redirect('/admin')
+        }
       }
     }
   }
@@ -47,8 +51,5 @@ Router.configure({
 
 Router.route('/', function() {
   this.render('custom_view')
-  this.waitOn = function() {
-    return [Meteor.subscribe('users')]
-  }
 })
 
