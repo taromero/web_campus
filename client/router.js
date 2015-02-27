@@ -1,3 +1,4 @@
+var isLoggedIn = Meteor.userId()
 Router.configure({
   onBeforeAction: function() {
     var _this = this
@@ -6,6 +7,14 @@ Router.configure({
     authCreateEdit()
 
     attempt_for_5_seconds_to(hide_audit_on_mobile)
+
+    Tracker.autorun(function() {
+      console.log(Meteor.userId())
+      if (isLoggedIn != Meteor.userId()) {
+        isLoggedIn = Meteor.userId()
+        Meteor.userId() &&_this.redirect('/') 
+      }
+    })
 
     this.waitOn = function() {
       return Collections.map(function(collection) {
