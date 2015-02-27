@@ -62,3 +62,7 @@ Router.route('/', function() {
   this.render('custom_view')
 })
 
+Router.route('/home', function() {
+  this.redirect('/')
+})
+
