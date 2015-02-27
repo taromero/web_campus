@@ -17,19 +17,6 @@ Template.course_item.helpers({
 // If I try to append this behavoiur to the courses accordion template (without implementing the
 // course_item template) it doesn't work sometimes.
 Template.course_item.rendered = function() {
-  $('.collapsible').collapsible()
-  // Workaround to avoid run condition between meteor and materialize
-  // unbind and bind to prevent multiple bindings to the same event handler
-  $('.collapsible-header').unbind('click.initializetabs').bind('click.initializetabs', initializeTabs)
-
-  function initializeTabs() {
-    var that = this
-    _initializeTabs()
-    setTimeout(_initializeTabs, 200)
-
-    function _initializeTabs() {
-      $(that).siblings('.collapsible-body').find('ul.tabs').first().tabs()
-    }
-  }
+  initializeCollapsibleAndTabs()
 }
 

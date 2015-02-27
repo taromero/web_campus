@@ -2,6 +2,7 @@ var isLoggedIn = Meteor.userId()
 Router.configure({
   onBeforeAction: function() {
     var _this = this
+    collapsibleInitialized = false
     requireLogin()
     onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
