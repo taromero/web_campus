@@ -13,3 +13,7 @@ Template.subject_item.helpers({
     })
   },
 })
+
+Template.subject_item.rendered = function() {
+  initializeCollapsibleAndTabs()
+}

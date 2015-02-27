@@ -38,7 +38,10 @@ var createUser  = {
     createUser._createUser(i, 't', 'teacher')
   },
   parent: function(i) {
-    createUser._createUser(i, 'p', 'parent')
+    var parent_id = createUser._createUser(i, 'p', 'parent')
+    Meteor.users.update(parent_id, { $set: {
+      dependant_ids: Meteor.users.find().fetch().filter(onlyStudents).map(getIds)
+    }})
   },
   student: function(i) {
     var student_demo_data = DemoData.Students.pop()
@@ -46,7 +49,8 @@ var createUser  = {
     Meteor.users.update(student_id, { $set: {
       course_id: Courses.findOne()._id,
       'profile.firstName': student_demo_data.firstName,
-      'profile.lastName': student_demo_data.lastName
+      'profile.lastName': student_demo_data.lastName,
+      subject_ids: Subjects.find().map(function(s) { return s._id })
     }})
   },
   _createUser: function(i, email, role) {

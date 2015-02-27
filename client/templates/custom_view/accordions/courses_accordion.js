@@ -4,6 +4,3 @@ Template.courses_accordion.helpers({
   }
 })
 
-Template.courses_accordion.rendered = function() {
-  $('.modal-trigger').leanModal()
-}
