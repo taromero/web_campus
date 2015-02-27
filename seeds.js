@@ -46,7 +46,8 @@ var createUser  = {
     Meteor.users.update(student_id, { $set: {
       course_id: Courses.findOne()._id,
       'profile.firstName': student_demo_data.firstName,
-      'profile.lastName': student_demo_data.lastName
+      'profile.lastName': student_demo_data.lastName,
+      subject_ids: Subjects.find().map(function(s) { return s._id })
     }})
   },
   _createUser: function(i, email, role) {

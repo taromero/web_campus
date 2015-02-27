@@ -19,7 +19,7 @@ DemoData = {
     names: [
       'Geografia',
       'Historia',
-      'Matemtica',
+      'Matematicas',
       'Lengua y Literura',
       'Economia',
       'Biologia',

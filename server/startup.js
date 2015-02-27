@@ -6,8 +6,8 @@ Meteor.startup(function() {
     Seed.create(12).courses()
     Seed.create(1).directives()
     Seed.create(2).teachers()
-    Seed.create(14).students()
     Seed.create(14).subjects()
+    Seed.create(14).students()
     Seed.create(14).exams()
     Seed.create(50).examScores()
   }
