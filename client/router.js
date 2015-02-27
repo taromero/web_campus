@@ -9,7 +9,6 @@ Router.configure({
     attempt_for_5_seconds_to(hide_audit_on_mobile)
 
     Tracker.autorun(function() {
-      console.log(Meteor.userId())
       if (isLoggedIn != Meteor.userId()) {
         isLoggedIn = Meteor.userId()
         Meteor.userId() &&_this.redirect('/') 
