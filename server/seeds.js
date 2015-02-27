@@ -32,10 +32,12 @@ Seed = {
 
 var createUser  = {
   directive: function (i) {
-    createUser._createUser(i, 'd', 'directive')
+    var directive_id = createUser._createUser(i, 'd', 'directive')
+    Roles.addUsersToRoles(directive_id, ['admin'])
   },
   teacher: function(i) {
-    createUser._createUser(i, 't', 'teacher')
+    var teacher_id = createUser._createUser(i, 't', 'teacher')
+    Roles.addUsersToRoles(teacher_id, ['admin'])
   },
   parent: function(i) {
     var parent_id = createUser._createUser(i, 'p', 'parent')
@@ -58,7 +60,7 @@ var createUser  = {
       email: email.indexOf('@') > -1 ? email : (email + i + '@m.com'),
       password: '1'
     })
-    Roles.addUsersToRoles(user_id, ['admin', role])
+    Roles.addUsersToRoles(user_id, [role])
     Meteor.users.update(user_id, { $set: { profile: Schemas.UserProfile.iterableSample(i) } })
     return user_id
   }

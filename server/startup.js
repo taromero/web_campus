@@ -12,4 +12,6 @@ Meteor.startup(function() {
     Seed.create(14).exams()
     Seed.create(50).examScores()
   }
+  // apply role filters (based on user's role) after seeding the app
+  RoleAbilities.apply()
 })
