@@ -38,7 +38,10 @@ var createUser  = {
     createUser._createUser(i, 't', 'teacher')
   },
   parent: function(i) {
-    createUser._createUser(i, 'p', 'parent')
+    var parent_id = createUser._createUser(i, 'p', 'parent')
+    Meteor.users.update(parent_id, { $set: {
+      dependant_ids: Meteor.users.find().fetch().filter(onlyStudents).map(getIds)
+    }})
   },
   student: function(i) {
     var student_demo_data = DemoData.Students.pop()

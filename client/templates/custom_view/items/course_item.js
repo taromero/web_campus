@@ -6,10 +6,6 @@ Template.course_item.helpers({
               user.email = user.emails[0]
               return user
             })
-
-    function onlyStudents(user) {
-      return _(user.roles).contains('student')
-    }
   }
 })
 

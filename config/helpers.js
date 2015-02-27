@@ -9,3 +9,12 @@ getRole = function(userId, filterCb) {
   }
   return user.roles.filter(function(role) { return role != 'admin' })[0]
 }
+
+onlyStudents = function(user) {
+  return _(user.roles).contains('student')
+}
+
+getIds = function(entity) {
+  return entity._id
+}
+

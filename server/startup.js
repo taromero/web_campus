@@ -8,6 +8,7 @@ Meteor.startup(function() {
     Seed.create(2).teachers()
     Seed.create(14).subjects()
     Seed.create(14).students()
+    Seed.create(14).parents()
     Seed.create(14).exams()
     Seed.create(50).examScores()
   }
