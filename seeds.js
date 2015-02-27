@@ -32,22 +32,26 @@ Seed = {
 
 var createUser  = {
   directive: function (i) {
-    createUser._createUser(i, 'aDirective', 'd', 'directive')
+    createUser._createUser(i, 'd', 'directive')
   },
   teacher: function(i) {
-    createUser._createUser(i, 'aTeacher', 't', 'teacher')
+    createUser._createUser(i, 't', 'teacher')
   },
   parent: function(i) {
-    createUser._createUser(i, 'aParent', 'p', 'parent')
+    createUser._createUser(i, 'p', 'parent')
   },
   student: function(i) {
-    var student_id = createUser._createUser(i, 'aStudent', 's', 'student')
-    Meteor.users.update(student_id, { $set: { course_id: Courses.findOne()._id }})
+    var student_demo_data = DemoData.Students.pop()
+    var student_id = createUser._createUser(i, student_demo_data.email, 'student')
+    Meteor.users.update(student_id, { $set: {
+      course_id: Courses.findOne()._id,
+      'profile.firstName': student_demo_data.firstName,
+      'profile.lastName': student_demo_data.lastName
+    }})
   },
-  _createUser: function(i, username, email_prefix, role) {
+  _createUser: function(i, email, role) {
     var user_id = Accounts.createUser({
-      username: username + i,
-      email: email_prefix + i + '@m.com',
+      email: email.indexOf('@') > -1 ? email : (email + i + '@m.com'),
       password: '1'
     })
     Roles.addUsersToRoles(user_id, ['admin', role])
