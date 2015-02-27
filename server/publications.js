@@ -1,9 +1,18 @@
 Meteor.publish('Users', function() {
-  return Meteor.users.find()
+  if (this.userId) {
+    return Meteor.users.find()
+  } else {
+    return []
+  }
 })
 
 Collections.forEach(function(collection) {
   Meteor.publish(collection.name, function() {
-    return collection.find()
+    if (this.userId) {
+      return collection.find()
+    } else {
+      return []
+    }
   })
 })
+

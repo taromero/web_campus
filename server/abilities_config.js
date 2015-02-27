@@ -9,8 +9,6 @@ Collections.forEach(function(collection) {
     }
     if (hasDefinedAbilities(role, collection, 'anyFind')) {
       return RoleAbilities[role].abilities[collection.name].anyFind(user, selector)
-    } else {
-      selector._id = 'prevent_find'
     }
   })
 
