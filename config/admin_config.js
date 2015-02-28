@@ -37,6 +37,10 @@ AdminConfig = {
     Resources: {
       label: 'Archivos',
       tableColumns: Resources.autoTable
+    },
+    Attendances: {
+      label: 'Asistencias',
+      tableColumns: Attendances.autoTable
     }
   }
 };
