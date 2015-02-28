@@ -7,21 +7,21 @@
     </div>
     <li class="collection-header"><h4><input type="date" class="datepicker attendance-datepicker"></h4></li>
     {{#each students}}
-      <li class="collection-item">
+      <li class="collection-item red lighten-2">
         <div class='container'>
           <div class='row'>
-            <div class='col l6 s4'>
+            <div class='col l6 s4 white-text'>
               {{profile.lastName}}, {{profile.firstName}}
             </div>
             <div class='col l3 s4'>
               <input type="checkbox" id="{{_id}}" class='half-attendance'/>
-              <label for="{{_id}}">
+              <label for="{{_id}}" class='white-text'>
                 <div class='hide-on-small-only'>Media Falta</div>
                 <div class='hide-on-med-and-up'>1/2</div>
               </label>
             </div>
             <div class="col l3 s4 switch">
-              <label>
+              <label class='white-text'>
                 Ausente
                 <input type="checkbox" class='attendance-switch'>
                 <span class="lever"></span>
