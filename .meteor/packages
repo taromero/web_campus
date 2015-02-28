@@ -22,4 +22,5 @@ yogiben:autoform-file
 cfs:standard-packages
 cfs:gridfs
 mrt:moment
+canotto90:preloader-mute-patch
 
