@@ -7,6 +7,11 @@ Router.configure({
     onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
 
+    if (onAdminRoute()) {
+      // remove Materialize css (as it uses Bootstrap)
+      $('link[href$="materialize.min.css"]').remove()
+    }
+
     attempt_for_5_seconds_to(hide_audit_on_mobile)
 
     Tracker.autorun(function() {
@@ -33,11 +38,15 @@ Router.configure({
     }
 
     function onlyAllowDirectivesAndTeachersOnAdmin() {
-      if (_(window.location.pathname.split('/')).contains('admin')) {
+      if (onAdminRoute()) {
         if (!_(['directive', 'teacher']).contains(getRole(Meteor.userId()))) {
           _this.redirect('/')
         }
       }
+    }
+
+    function onAdminRoute() {
+      return _(window.location.pathname.split('/')).contains('admin')
     }
 
     function authCreateEdit() {
@@ -58,8 +67,12 @@ Router.configure({
   }
 })
 
-Router.route('/', function() {
-  this.render('custom_view')
+Router.route('/', {
+  template: 'custom_view',
+  controller: PreloadController,
+  preload: {
+    styles: '/materialize/css/materialize.min.css'
+  }
 })
 
 Router.route('/home', function() {

@@ -16,6 +16,7 @@ blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
 canotto90:admin-1.1.0-patch@0.6.1
+canotto90:preloader-mute-patch@1.2.1
 cfs:access-point@0.1.43
 cfs:base-package@0.0.27
 cfs:collection@0.5.3

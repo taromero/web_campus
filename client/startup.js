@@ -3,4 +3,6 @@ Meteor.startup(function() {
     dashboardRoute: '/',
     passwordSignupFields: 'EMAIL_ONLY'
   })
+  // prevent console.infos from the preloader lib
+  window.PreloaderMute = true
 })
