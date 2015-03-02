@@ -1,8 +1,9 @@
 Template.attendances_collection.helpers({
   students: function() {
-    return Meteor.users.find({ course_id: this.course_id }).fetch(onlyStudents).map(addShortName)
+    var _that = this
+    return Meteor.users.find({ course_id: this.course_id }).fetch(onlyStudents).map(addShortNameAndAttendanceState)
 
-    function addShortName(student, index, students) {
+    function addShortNameAndAttendanceState(student, index, students) {
       var anotherWithSameLastName = students.filter(function(_student) {
         return _student.lastName == student.lastName
       }).length > 2
@@ -12,7 +13,18 @@ Template.attendances_collection.helpers({
       } else {
         student.profile.shortName = student.profile.lastName
       }
+
+      student.attendanceState = Attendances.findOne({ course_id: _that.course_id, date: { $gt: moment().subtract(1, 'day'), $lt: moment().add(1, 'day') } })
       return student
+    }
+  },
+  stateToColor: function(state) {
+    if (!state || state == 'Ausente') {
+      return 'red lighten-2'
+    } else if (state == 'Media Falta') {
+      return 'deep-orange lighten-3'
+    } else {
+      return 'green lighten-3'
     }
   }
 })
@@ -62,14 +74,37 @@ Template.attendances_collection.events({
       preventRowColorChange = true
       $relatedSwitch.siblings('.lever').click()
     }
+  },
+  'click #save-attendances': function() {
+    saveAttendances()
   }
 })
 
 Template.attendances_collection.rendered = function() {
-  $('.datepicker').pickadate()
-  $('.attendance-datepicker').val(moment().format('LL'))
-
   // initialize the switches with off value for now (default is "on" but with the swith deactivated)
   $('.attendance-switch').val('off')
   $('.half-attendance').val('off')
 }
+
+function saveAttendances() {
+  var attendances = []
+  $('.attendance-row').each(function(index, row) {
+    var $row = $(row)
+    var student_id = $row.data('student-id')
+    var state = gatherState($row)
+    attendances.push({ student_id: student_id, state: state })
+  })
+
+  Meteor.call('saveAttendances', attendances)
+
+  function gatherState($row) {
+    var state = ''
+    if ($row.find('.half-attendance').val() === 'on') {
+      state = 'Media Falta'
+    } else {
+      state = $row.find('label:visible .attendance-switch').val() === 'on' ? 'Presente' : 'Ausente'
+    }
+    return state
+  }
+}
+

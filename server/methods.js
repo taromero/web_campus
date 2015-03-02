@@ -11,5 +11,16 @@ Meteor.methods({
     } else {
       ExamScores.insert(data)
     }
+  },
+  saveAttendances: function(attendances) {
+    var course_id = Meteor.users.findOne(attendances[0].student_id).course_id
+    attendances.forEach(function(attendance) {
+      Attendances.insert({
+        course_id: course_id,
+        user_id: attendance.student_id,
+        date: new Date(),
+        state: attendance.state
+      })
+    })
   }
 })
