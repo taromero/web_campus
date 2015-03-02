@@ -1,0 +1,29 @@
+<template name='attendance_item'>
+  <li class="collection-item {{stateToColor student.attendance.state}}">
+    <div class='row attendance-row' data-student-id='{{student._id}}'>
+      <div class='col l6 s4 white-text'>
+        <div class='hide-on-med-and-down'>{{student.profile.lastName}}, {{student.profile.firstName}}</div>
+        <div class='hide-on-large-only'>{{student.profile.shortName}}</div>
+      </div>
+      <div class='col l3 s4'>
+        <input type="checkbox" id="{{student._id}}" class='half-attendance' value='{{hasHalfAttendance student.attendance.state}}'/>
+        <label for="{{student._id}}" class='white-text'>
+          <div class='hide-on-small-only'>Media Falta</div>
+          <div class='hide-on-med-and-up'>1/2</div>
+        </label>
+      </div>
+      <div class="col l3 s4 switch">
+        <label class='white-text hide-on-med-and-down'>
+          Ausente
+          <input type="checkbox" class='attendance-switch' value='{{isPresent student.attendance.state}}'>
+          <span class="lever"></span>
+          Presente
+        </label>
+        <label class='white-text hide-on-large-only'>
+          <input type="checkbox" class='attendance-switch'>
+          <span class="lever"></span>
+        </label>
+      </div>
+    </div>
+  </li>
+</template>

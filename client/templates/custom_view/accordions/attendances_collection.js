@@ -14,17 +14,14 @@ Template.attendances_collection.helpers({
         student.profile.shortName = student.profile.lastName
       }
 
-      student.attendanceState = Attendances.findOne({ course_id: _that.course_id, date: { $gt: moment().subtract(1, 'day'), $lt: moment().add(1, 'day') } })
+      student.attendance = Attendances.findOne({
+        course_id: _that.course_id,
+        user_id: student._id,
+        date: { $gt: moment().subtract(1, 'day')._d, $lt: moment().add(1, 'day')._d }
+      })
+
+      student.attendance = student.attendance || {}
       return student
-    }
-  },
-  stateToColor: function(state) {
-    if (!state || state == 'Ausente') {
-      return 'red lighten-2'
-    } else if (state == 'Media Falta') {
-      return 'deep-orange lighten-3'
-    } else {
-      return 'green lighten-3'
     }
   }
 })
@@ -35,7 +32,7 @@ Template.attendances_collection.events({
     // Apparently the switch component of Materialize doesn't change the value of the checkbox,
     // so we have to do it ourselves
     var $switchInput = $(event.currentTarget).siblings('input')
-    var hasActivatedSwitch = $switchInput.val() == 'off' //if it was off, a click activates it
+    var hasActivatedSwitch = _(['off', '_on']).contains($switchInput.val()) //if it was off, a click activates it
     var newVal = !hasActivatedSwitch ? 'off' : 'on'
     var $relatedHalfAttendance = $switchInput.closest('.row').find('.half-attendance')
     var collectionItem = $switchInput.closest('.collection-item')
@@ -57,7 +54,7 @@ Template.attendances_collection.events({
   },
   'click .half-attendance': function(event) {
     var $checkbox = $(event.currentTarget)
-    var hasActivatedHalfAttendance = $checkbox.val() == 'off' //if it was off, a click activates it
+    var hasActivatedHalfAttendance = _(['off', '_on']).contains($checkbox.val()) //if it was off, a click activates it
     var newVal = !hasActivatedHalfAttendance ? 'off' : 'on'
     var $relatedSwitch = $checkbox.closest('.row').find('label:visible .attendance-switch') //label:visible is because we have 2 switches (1 for large and 1 for med-and-down)
     var collectionItem = $checkbox.closest('.collection-item')
@@ -79,12 +76,6 @@ Template.attendances_collection.events({
     saveAttendances()
   }
 })
-
-Template.attendances_collection.rendered = function() {
-  // initialize the switches with off value for now (default is "on" but with the swith deactivated)
-  $('.attendance-switch').val('off')
-  $('.half-attendance').val('off')
-}
 
 function saveAttendances() {
   var attendances = []

@@ -6,33 +6,7 @@
       </a>
     </div>
     {{#each students}}
-      <li class="collection-item {{stateToColor state}}">
-      <div class='row attendance-row' data-student-id='{{_id}}'>
-          <div class='col l6 s4 white-text'>
-            <div class='hide-on-med-and-down'>{{profile.lastName}}, {{profile.firstName}}</div>
-            <div class='hide-on-large-only'>{{profile.shortName}}</div>
-          </div>
-          <div class='col l3 s4'>
-            <input type="checkbox" id="{{_id}}" class='half-attendance'/>
-            <label for="{{_id}}" class='white-text'>
-              <div class='hide-on-small-only'>Media Falta</div>
-              <div class='hide-on-med-and-up'>1/2</div>
-            </label>
-          </div>
-          <div class="col l3 s4 switch">
-            <label class='white-text hide-on-med-and-down'>
-              Ausente
-              <input type="checkbox" class='attendance-switch'>
-              <span class="lever"></span>
-              Presente
-            </label>
-            <label class='white-text hide-on-large-only'>
-              <input type="checkbox" class='attendance-switch'>
-              <span class="lever"></span>
-            </label>
-          </div>
-        </div>
-      </li>
+      {{> attendance_item student=this}}
     {{/each}}
   </ul>
 </template>
