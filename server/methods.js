@@ -14,12 +14,12 @@ Meteor.methods({
   },
   saveAttendances: function(attendances) {
     var course_id = Meteor.users.findOne(attendances[0].student_id).course_id
+    var selector = {
+      course_id: course_id,
+      date: { $gt: moment().subtract(1, 'day')._d, $lt: moment().add(1, 'day')._d }
+    }
     attendances.forEach(function(attendance) {
-      var selector = {
-        course_id: course_id,
-        user_id: attendance.student_id,
-        date: { $gt: moment().subtract(1, 'day')._d, $lt: moment().add(1, 'day')._d }
-      }
+      selector.user_id = attendance.student_id
       var values = {
         course_id: course_id,
         user_id: attendance.student_id,
@@ -36,3 +36,5 @@ Meteor.methods({
     })
   }
 })
+
+

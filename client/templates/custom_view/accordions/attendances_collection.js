@@ -86,7 +86,16 @@ function saveAttendances() {
     attendances.push({ student_id: student_id, state: state })
   })
 
-  Meteor.call('saveAttendances', attendances)
+
+  $('.attendance-progress').show()
+  Meteor.call('saveAttendances', attendances, function(error, msg) {
+    swal({
+      title: 'Asistencia Guardada!',
+      type: 'success',
+      html: true
+    })
+    $('.attendance-progress').hide()
+  })
 
   function gatherState($row) {
     var state = ''
