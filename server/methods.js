@@ -34,6 +34,12 @@ Meteor.methods({
         Attendances.insert(values)
       }
     })
+  },
+  notify: function(title, message) {
+    return notificationClient.sendNotification(this.userId, {
+      title: title,
+      message: message
+    });
   }
 })
 
