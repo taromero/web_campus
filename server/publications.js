@@ -12,7 +12,7 @@ Meteor.publish('Users', function() {
 Collections.forEach(function(collection) {
   Meteor.publish(collection.name, function() {
     if (this.userId) {
-      return collection.find({}, collection.defaultOptions)
+      return collection.find(collection.defaultSelector || {}, collection.defaultOptions)
     } else {
       return []
     }
