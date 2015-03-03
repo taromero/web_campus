@@ -42,7 +42,6 @@ ejson@1.0.5
 email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
-fortawesome:fontawesome@4.2.0_2
 geojson-utils@1.0.2
 handlebars@1.0.2
 html-tools@1.0.3
@@ -80,6 +79,8 @@ mongo-livedata@1.0.7
 mrt:moment@2.8.1
 mrt:underscore-string-latest@2.3.3
 multiply:iron-router-progress@1.0.1
+natestrauser:connection-banner@0.4.3
+natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.7
 observe-sequence@1.0.4
 ordered-dict@1.0.2

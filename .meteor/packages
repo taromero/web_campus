@@ -10,7 +10,7 @@ iron:router
 accounts-base
 accounts-password
 twbs:bootstrap
-fortawesome:fontawesome
+natestrauser:font-awesome
 aldeed:simple-schema
 canotto90:admin-1.1.0-patch@0.6.1
 joshowens:accounts-entry
@@ -23,4 +23,5 @@ cfs:standard-packages
 cfs:gridfs
 mrt:moment
 canotto90:preloader-mute-patch
+natestrauser:connection-banner
 
