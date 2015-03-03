@@ -5,7 +5,7 @@ Template.attendances_collection.helpers({
 
     function addShortNameAndAttendanceState(student, index, students) {
       var anotherWithSameLastName = students.filter(function(_student) {
-        return _student.lastName == student.lastName
+        return _student.profile.lastName == student.profile.lastName
       }).length > 2
 
       if (anotherWithSameLastName) {
