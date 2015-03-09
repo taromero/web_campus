@@ -6,12 +6,8 @@ Template.subject_item.helpers({
     return Exams.find({ subject_id: subjectId })
   },
   resources: function(subjectId) {
-    var resources = Resources.find({ subject_id: subjectId })
-    return resources.map(function(resource) {
-      resource.filename = Files.findOne(resource.file_id).original.name
-      return resource
-    })
-  },
+    return Resources.find({ subject_id: subjectId })
+  }
 })
 
 Template.subject_item.rendered = function() {

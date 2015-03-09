@@ -23,7 +23,7 @@
         <ul class="collection">
           {{#each resources _id}}
             <li class='collection-item teal'>
-            <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
+            <a href="{{url}}" download="{{name}}" class="btn waves-effect waves-light"> {{name}}
                 <i class="mdi-file-file-download"></i>
               </a>
               <span class='white-text'> Subido: {{formatDate createdAt}} </span>

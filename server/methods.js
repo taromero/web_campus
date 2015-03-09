@@ -34,6 +34,14 @@ Meteor.methods({
         Attendances.insert(values)
       }
     })
+  },
+  createResource: function(name, downloadUrl, fileType) {
+    Resources.insert({
+      subject_id: Subjects.findOne()._id,
+      name: name,
+      url: downloadUrl,
+      type: fileType
+    })
   }
 })
 
