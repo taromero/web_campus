@@ -42,6 +42,11 @@ Meteor.methods({
       url: downloadUrl,
       type: fileType
     })
+  },
+  deleteResource: function(resourceId) {
+    var resource = Resources.findOne(resourceId)
+    s3.deleteFile(resource.url)
+    Resources.remove(resourceId)
   }
 })
 
