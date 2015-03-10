@@ -13,6 +13,7 @@ Router.configure({
     }
 
     attempt_for_5_seconds_to(hide_audit_on_mobile)
+    attempt_for_5_seconds_to(hide_register_section_on_sign_in)
 
     Tracker.autorun(function() {
       if (isLoggedIn != Meteor.userId()) {
@@ -69,6 +70,10 @@ Router.configure({
           _this.redirect('/admin')
         }
       }
+    }
+
+    function hide_register_section_on_sign_in() {
+      $('.entry-signup-cta').hide()
     }
   }
 })

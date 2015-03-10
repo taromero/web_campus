@@ -23,12 +23,12 @@ attempt_for_5_seconds_to = function(fn) {
   fn()
   var counter = 0
   var interval = setInterval(function() {
-    if (counter == 10) {
+    if (counter == 50) {
       clearInterval(interval)
       return
     }
     fn()
     counter++
-  }, 500)
+  }, 100)
 }
 
