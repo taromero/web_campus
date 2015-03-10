@@ -7,7 +7,7 @@ Router.configure({
     onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
 
-    if (onAdminRoute()) {
+    if (onAdminRoute() || onSessionRoute()) {
       // remove Materialize css (as it uses Bootstrap)
       $('link[href$="materialize.min.css"]').remove()
     }
@@ -46,7 +46,13 @@ Router.configure({
     }
 
     function onAdminRoute() {
-      return _(window.location.pathname.split('/')).contains('admin')
+      var _path = _(window.location.pathname.split('/'))
+      return _path.contains('admin')
+    }
+
+    function onSessionRoute() {
+      var path = Router.current().route.path()
+      return path == '/sign-in'
     }
 
     function authCreateEdit() {
