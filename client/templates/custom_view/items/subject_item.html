@@ -20,16 +20,26 @@
       </div>
       <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
       <div id="resources{{_id}}" class="col s12">
-        <ul class="collection">
-          {{#each resources _id}}
-            <li class='collection-item teal'>
-            <a href="cfs/files/files/{{file_id}}" download="{{filename}}" class="btn waves-effect waves-light"> {{filename}}
-                <i class="mdi-file-file-download"></i>
-              </a>
-              <span class='white-text'> Subido: {{formatDate createdAt}} </span>
-            </li>
-          {{/each}}
-        </ul>
+        <div class='row'>
+          {{#if adminAllowed}}
+            <div class='col s12 m6'>
+              {{> file_upload}}
+            </div>
+          {{/if}}
+          <div {{addColumnSize adminAllowed}}>
+            <ul class="collection">
+              {{#each resources _id}}
+                <li class='collection-item teal'>
+                  <a href="{{url}}" download="{{name}}" class="btn waves-effect waves-light"> {{name}}
+                    <i class="mdi-file-file-download"></i>
+                  </a>
+                  <span class='white-text'> Subido: {{formatDate createdAt}} </span>
+                  <a href="#!" class="secondary-content deleteResource" id='{{_id}}'><i class="small mdi-action-delete" style='color:white'></i></a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   {{/with}}

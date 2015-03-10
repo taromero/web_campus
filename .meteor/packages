@@ -19,9 +19,9 @@ sewdn:collection-behaviours
 alanning:roles
 anti:fake
 yogiben:autoform-file
-cfs:standard-packages
-cfs:gridfs
 mrt:moment
 canotto90:preloader-mute-patch
 natestrauser:connection-banner
+edgee:slingshot
+rainhaven:s3
 

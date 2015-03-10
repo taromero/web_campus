@@ -6,14 +6,40 @@ Template.subject_item.helpers({
     return Exams.find({ subject_id: subjectId })
   },
   resources: function(subjectId) {
-    var resources = Resources.find({ subject_id: subjectId })
-    return resources.map(function(resource) {
-      resource.filename = Files.findOne(resource.file_id).original.name
-      return resource
-    })
+    return Resources.find({ subject_id: subjectId })
   },
+  addColumnSize: function(isAdmin) {
+    return {
+      class: 'col s12' + (isAdmin ? 'm6' : '')
+    }
+  }
 })
 
 Template.subject_item.rendered = function() {
   initializeCollapsibleAndTabs()
 }
+
+Template.subject_item.events({
+  'click .deleteResource': function(event) {
+    var id = event.currentTarget.id
+    swal({
+      title: "Borrar archivo?",
+      text: "El archivo se borrara de forma permanente.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Borrar!",
+      cancelButtonText: "Cancelar",
+      closeOnConfirm: false
+    }, function() {
+      Meteor.call('deleteResource', id, function(err, res) {
+        if (!err) {
+          swal("Borrado!", "El archivo se borro exitosamente.", "success")
+        } else {
+          swal('Error al intentar borrar el archivo', err, 'error')
+        }
+      })
+    })
+  }
+})
+

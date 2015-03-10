@@ -1,0 +1,50 @@
+<template name='file_upload'>
+  <div class='container'>
+    {{> progressBar}}
+    <div class='row' style='margin-bottom:0'>
+      <div class="col s12 m6">
+        <div class="file-field input-field">
+          <button class="btn-large waves-effect waves-light" style='position:relative'>
+            <span>Subir Nuevo</span>
+            <input type="file" class='file_input'/>
+          </button>
+        </div>
+      </div>
+      <div class="col s12 m6 showOnSelectedFile" style='display:none'>
+        <div class="card-panel light-blue">
+          <span class="white-text">{{file_name}}</span>
+        </div>
+      </div>
+    </div>
+    <div class='row previewRow showOnSelectedFile' style='display:none'>
+      <div class="col s12 m6">
+        <button id='cancel_upload' class='waves-effect waves-light btn red'>Cancelar</button>
+      </div>
+      <div class="col s12 m6">
+        {{> upload_preview}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="progressBar">
+  <div class="progress" style='display:none'>
+    <div class="determinate" style="width: {{progress}}%"></div>
+  </div>
+</template>
+
+<template name='upload_preview'>
+  <div style="clear:both">
+    <iframe id="pdf_preview" style='display:none' frameborder="0" scrolling="no" width="300" height="450"></iframe>
+    <button id='create_resource' class='waves-effect waves-light btn separate' style='display:none'><i class="mdi-file-file-upload left"></i>Subir</button>
+  </div>
+  <div id='image_preview_container' class="card" style='display:none'>
+    <div class="card-image">
+      <img id='image_preview'>
+    </div>
+    <div class="card-action valign-wrapper">
+      <button id='create_resource' class='waves-effect waves-light btn valign'><i class="mdi-file-file-upload left"></i>Subir</button>
+    </div>
+  </div>
+</template>
+
