@@ -7,6 +7,11 @@ Template.subject_item.helpers({
   },
   resources: function(subjectId) {
     return Resources.find({ subject_id: subjectId })
+  },
+  addColumnSize: function(isAdmin) {
+    return {
+      class: 'col s12' + (isAdmin ? 'm6' : '')
+    }
   }
 })
 

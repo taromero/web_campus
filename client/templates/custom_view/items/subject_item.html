@@ -21,10 +21,12 @@
       <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
       <div id="resources{{_id}}" class="col s12">
         <div class='row'>
-          <div class='col s12 m6'>
-            {{> file_upload}}
-          </div>
-          <div class='col s12 m6'>
+          {{#if adminAllowed}}
+            <div class='col s12 m6'>
+              {{> file_upload}}
+            </div>
+          {{/if}}
+          <div {{addColumnSize adminAllowed}}>
             <ul class="collection">
               {{#each resources _id}}
                 <li class='collection-item teal'>
