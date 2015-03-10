@@ -5,8 +5,9 @@ Slingshot.createDirective("myFileUploads", Slingshot.S3Storage, {
   acl: "public-read",
 
   authorize: function () {
-    //Deny uploads if user is not logged in.
-    if (!this.userId) {
+    var role = getRole(this.userId)
+    //Deny uploads if user is not logged in or if not admin
+    if (!this.userId || !_(['directive', 'teacher']).containg(role)) {
       var message = "Please login before posting files";
       throw new Meteor.Error("Login Required", message);
     }

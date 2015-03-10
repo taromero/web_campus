@@ -1,4 +1,4 @@
-getRole = function(userId, filterCb) {
+getRole = function(userId) {
   if (!userId) {
     return {}
   }
