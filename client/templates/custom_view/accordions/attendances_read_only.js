@@ -32,3 +32,15 @@ Template.attendances_student_collection.helpers({
     }
   }
 })
+
+Template.parent_attendances.helpers({
+  dependants: function() {
+    if (Meteor.user().dependant_ids ) {
+      return Meteor.users.find({ _id: { $in: Meteor.user().dependant_ids } })
+    }
+  }
+})
+
+Template.parent_attendances.rendered = function() {
+  $('.collapsible').collapsible()
+}

@@ -90,7 +90,7 @@ Router.route('/', {
 })
 
 Router.route('/asistencias', {
-  template: 'attendances_student_collection',
+  template: 'attendances_read_only',
   controller: PreloadController,
   preload: {
     styles: '/materialize/css/materialize.min.css'

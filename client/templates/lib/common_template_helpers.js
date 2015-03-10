@@ -22,6 +22,10 @@ Template.registerHelper('adminAllowed', function() {
   return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
 })
 
+Template.registerHelper('parent', function() {
+  return getRole(Meteor.userId()) == 'parent'
+})
+
 initializeCollapsibleAndTabs = function() {
   if (collapsibleInitialized) {
     return

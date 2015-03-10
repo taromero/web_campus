@@ -1,0 +1,49 @@
+<template name='attendances_student_collection'>
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <div class='row'>
+        <div class='col s6 m3'>
+          Total: {{count 'a+ha'}}
+        </div>
+        <div class='col s6 m3'>
+          Faltas: {{count 'Ausente'}}
+        </div>
+        <div class='col s6 m3'>
+          Medias Faltas: {{count 'Media Falta'}}
+        </div>
+        <div class='col s6 m3'>
+          Presentes: {{count 'Presente'}}
+        </div>
+      </div>
+    </li>
+    {{#each attendances}}
+      <li class="collection-item {{colorFor state}}">{{dateWithDayName  date}}</li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name='attendances_read_only'>
+  {{>connectionBanner}}
+  {{> custom_view_header}}
+  <div class='container'>
+    {{#if parent}}
+      {{> parent_attendances}}
+    {{else}}
+      {{> attendances_student_collection}}
+    {{/if}}
+  </div>
+</template>
+
+<template name='parent_attendances'>
+  <ul class="collapsible" data-collapsible="accordion">
+    {{#each dependants}}
+      <li>
+        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{profile.firstName}} {{profile.lastName}}</div>
+        <div class="collapsible-body">
+          {{> attendances_student_collection student_id=_id}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+
+</template>
