@@ -19,3 +19,12 @@ Collections.forEach(function(collection) {
   })
 })
 
+Meteor.publish('attendances_for_student', function() {
+  if (this.userId) {
+    // Attendances find hook takes care of publishing only relevant records
+    return Attendances.find()
+  } else {
+    return []
+  }
+})
+

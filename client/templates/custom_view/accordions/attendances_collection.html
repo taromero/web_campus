@@ -13,3 +13,24 @@
     {{/each}}
   </ul>
 </template>
+
+<template name='attendances_collection_read_only'>
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <div class='row'>
+        <div class='col s12 m4'>
+          Total: 20
+        </div>
+        <div class='col s12 m4'>
+          Faltas: 15
+        </div>
+        <div class='col s12 m4'>
+          Medias Faltas: 10
+        </div>
+      </div>
+    </li>
+    {{#each attendances}}
+      <li class="collection-item">Alvin</li>
+    {{/each}}
+  </ul>
+</template>

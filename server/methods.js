@@ -1,8 +1,8 @@
 Meteor.methods({
   upsertScores: function(params) {
-    var selector = { user_id: params.user_id, exam_id: params.exam_id }
+    var selector = { student_id: params.student_id, exam_id: params.exam_id }
     var data = {
-      user_id: params.user_id,
+      student_id: params.student_id,
       exam_id: params.exam_id,
       score: params.score
     }
@@ -19,10 +19,10 @@ Meteor.methods({
       date: { $gt: moment().subtract(1, 'day')._d, $lt: moment().add(1, 'day')._d }
     }
     attendances.forEach(function(attendance) {
-      selector.user_id = attendance.student_id
+      selector.student_id = attendance.student_id
       var values = {
         course_id: course_id,
-        user_id: attendance.student_id,
+        student_id: attendance.student_id,
         date: new Date(),
         state: attendance.state
       }
