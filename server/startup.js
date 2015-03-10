@@ -1,6 +1,6 @@
 Meteor.startup(function() {
   AccountsEntry.config({
-    signupCode: 'enigma_secret_sdfw4rasdfg'
+    signupCode: Meteor.settings.signupCode
   })
   if (Meteor.users.find().count() <= 0) {
     Seed.create(12).courses()
