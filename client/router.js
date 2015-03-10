@@ -25,7 +25,10 @@ Router.configure({
     this.waitOn = function() {
       return Collections.map(function(collection) {
         return Meteor.subscribe(collection.name)
-      }).concat([Meteor.subscribe('Users')])
+      }).concat([
+        Meteor.subscribe('Users'),
+        Meteor.subscribe('attendances_for_student')
+      ])
     }
 
     this.next && this.next()
@@ -80,6 +83,14 @@ Router.configure({
 
 Router.route('/', {
   template: 'custom_view',
+  controller: PreloadController,
+  preload: {
+    styles: '/materialize/css/materialize.min.css'
+  }
+})
+
+Router.route('/asistencias', {
+  template: 'attendances_read_only',
   controller: PreloadController,
   preload: {
     styles: '/materialize/css/materialize.min.css'

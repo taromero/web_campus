@@ -12,8 +12,18 @@ Template.registerHelper('showIf', function(condition) {
   }
 });
 
+Template.registerHelper('hideIf', function(condition) {
+  return {
+    class: condition ? 'hide' : ''
+  }
+});
+
 Template.registerHelper('adminAllowed', function() {
   return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
+})
+
+Template.registerHelper('parent', function() {
+  return getRole(Meteor.userId()) == 'parent'
 })
 
 initializeCollapsibleAndTabs = function() {

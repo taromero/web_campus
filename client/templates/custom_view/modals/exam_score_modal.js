@@ -4,7 +4,7 @@ Template.exam_score_modal.helpers({
     return Meteor.users.find({ course_id: Subjects.findOne(Exams.findOne(this.exam_id).subject_id).course_id }).map(addExamScore)
 
     function addExamScore(student) {
-      var examScore = ExamScores.findOne({ exam_id: _that.exam_id, user_id: student._id })
+      var examScore = ExamScores.findOne({ exam_id: _that.exam_id, student_id: student._id })
       if (examScore) {
         student.examScore = examScore.score
       }
@@ -29,7 +29,7 @@ Template.exam_score_modal.events({
     }
 
     function upsertScores(index, ss) {
-      Meteor.call('upsertScores', { user_id: ss.student_id, exam_id: _that.exam_id, score: ss.score})
+      Meteor.call('upsertScores', { student_id: ss.student_id, exam_id: _that.exam_id, score: ss.score})
     }
   }
 })

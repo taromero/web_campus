@@ -16,7 +16,7 @@ Template.attendances_collection.helpers({
 
       student.attendance = Attendances.findOne({
         course_id: _that.course_id,
-        user_id: student._id,
+        student_id: student._id,
         date: { $gt: moment().subtract(1, 'day')._d, $lt: moment().add(1, 'day')._d }
       })
 
