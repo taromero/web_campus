@@ -12,6 +12,12 @@ Template.registerHelper('showIf', function(condition) {
   }
 });
 
+Template.registerHelper('hideIf', function(condition) {
+  return {
+    class: condition ? 'hide' : ''
+  }
+});
+
 Template.registerHelper('adminAllowed', function() {
   return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
 })

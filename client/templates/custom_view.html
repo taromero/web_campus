@@ -18,7 +18,7 @@
 
 <template name='custom_view_header'>
   <nav>
-    <a href="#!" class="brand-logo hide-on-med-and-down">Web Campus</a>
+    <a href="/" class="brand-logo hide-on-med-and-down">Web Campus</a>
     <ul class="right hide-on-med-and-down">
       {{> header_links}}
     </ul>
@@ -31,6 +31,8 @@
 
 <template name='header_links'>
   <li {{showIf adminAllowed}}><a href="/admin">Administracion</a></li>
+  <li><a href="/">Home</a></li>
+  <li {{hideIf adminAllowed}}><a href="/asistencias">Asistencias</a></li>
   <li><a href="/sign-out">Salir</a></li>
 </template>
 

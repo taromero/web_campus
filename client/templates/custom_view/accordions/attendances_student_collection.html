@@ -1,0 +1,27 @@
+<template name='attendances_student_collection'>
+  {{>connectionBanner}}
+  {{> custom_view_header}}
+  <div class='container'>
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <div class='row'>
+          <div class='col s6 m3'>
+            Total: {{count 'a+ha'}}
+          </div>
+          <div class='col s6 m3'>
+            Faltas: {{count 'Ausente'}}
+          </div>
+          <div class='col s6 m3'>
+            Medias Faltas: {{count 'Media Falta'}}
+          </div>
+          <div class='col s6 m3'>
+            Presentes: {{count 'Presente'}}
+          </div>
+        </div>
+      </li>
+      {{#each attendances}}
+        <li class="collection-item {{colorFor state}}">{{dateWithDayName  date}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
