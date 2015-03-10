@@ -19,7 +19,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" value='{{_id}}' class="waves-effect waves-green btn-flat modal-action custom-modal-trigger" {{showIf adminAllowed}}>Editar Notas</a>
+        {{#if adminAllowed}}
+          <a href="#" value='{{_id}}' class="waves-effect waves-green btn-flat modal-action custom-modal-trigger">Editar Notas</a>
+        {{/if}}
         <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
       </div>
     </div>
