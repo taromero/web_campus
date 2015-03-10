@@ -79,11 +79,3 @@ Router.route('/home', function() {
   this.redirect('/')
 })
 
-Router.route('/files', {
-  template: 'file_upload',
-  controller: PreloadController,
-  preload: {
-    styles: '/materialize/css/materialize.min.css'
-  }
-})
-
