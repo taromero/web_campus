@@ -1,4 +1,5 @@
 Meteor.startup(function() {
+  process.env.MAIL_URL = generateMailUrl()
   AccountsEntry.config({
     signupCode: Meteor.settings.signupCode
   })
@@ -14,4 +15,9 @@ Meteor.startup(function() {
   }
   // apply role filters (based on user's role) after seeding the app
   RoleAbilities.apply()
+
+  function generateMailUrl() {
+    var smtp = Meteor.settings.smtp
+    return 'smtp://' + smtp.username + ':' + smtp.password + '@' + smtp.host + ':' + smtp.port
+  }
 })
