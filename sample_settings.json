@@ -6,5 +6,22 @@
       "reconnectBeforeCountdownText":"Tratando de reconectar en ",
       "reconnectAfterCountdownText":"segundos."
     }
+  },
+  "AWSAccessKeyId": "",
+  "AWSSecretAccessKey": "",
+  "s3": {
+    "key": "",
+    "secret": ""
+  },
+  "signupCode": "",
+  "kadira": { 
+    "appId": "", 
+    "appSecret": "" 
+  },
+  "smtp": {
+    "username": "",
+    "password": "",
+    "host": "",
+    "port": ""
   }
 }
