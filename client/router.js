@@ -36,7 +36,7 @@ Router.configure({
     function requireLogin() {
       var exceptedRoutes = ['/sign-in', '/sign-up', '/forgot-password']
       var path = window.location.pathname
-      if (!_(exceptedRoutes).contains(path)) {
+      if (!_(exceptedRoutes).contains(path) && !/\/reset-password\/.*/.test(path)) {
         AccountsEntry.signInRequired(_this)
       }
     }
