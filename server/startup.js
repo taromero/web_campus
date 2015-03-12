@@ -1,8 +1,5 @@
 Meteor.startup(function() {
   process.env.MAIL_URL = generateMailUrl()
-  AccountsEntry.config({
-    signupCode: Meteor.settings.signupCode
-  })
   if (Meteor.users.find().count() <= 0) {
     Seed.create(12).courses()
     Seed.create(1).directives()

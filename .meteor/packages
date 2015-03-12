@@ -13,18 +13,18 @@ twbs:bootstrap
 natestrauser:font-awesome
 aldeed:simple-schema
 canotto90:admin-1.1.0-patch@0.6.1
-joshowens:accounts-entry
 multiply:iron-router-progress
 sewdn:collection-behaviours
 alanning:roles
 anti:fake
 yogiben:autoform-file
 mrt:moment
-canotto90:preloader-mute-patch
 natestrauser:connection-banner
 edgee:slingshot
 rainhaven:s3
 meteorhacks:kadira
 meteorhacks:zones
 email
+useraccounts:materialize
+materialize:materialize
 
