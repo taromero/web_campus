@@ -29,5 +29,9 @@ Template.custom_view_header.rendered = function() {
   $('.modal-trigger').leanModal()
 }
 
-
+Template.header_links.events({
+  'click #sign-out': function() {
+    Meteor.logout()
+  }
+})
 

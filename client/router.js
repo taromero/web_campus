@@ -3,24 +3,16 @@ Router.configure({
   onBeforeAction: function() {
     var _this = this
     collapsibleInitialized = false
-    requireLogin()
     onlyAllowDirectivesAndTeachersOnAdmin()
     authCreateEdit()
 
-    if (onAdminRoute() || onSessionRoute()) {
+    if (onAdminRoute()) {
       // remove Materialize css (as it uses Bootstrap)
       $('link[href$="materialize.min.css"]').remove()
     }
 
     attempt_for_5_seconds_to(hide_audit_on_mobile)
-    attempt_for_5_seconds_to(hide_register_section_on_sign_in)
-
-    Tracker.autorun(function() {
-      if (isLoggedIn != Meteor.userId()) {
-        isLoggedIn = Meteor.userId()
-        Meteor.userId() &&_this.redirect('/') 
-      }
-    })
+    attempt_for_5_seconds_to(normalize_admin_navbar)
 
     this.waitOn = function() {
       return Collections.map(function(collection) {
@@ -33,14 +25,6 @@ Router.configure({
 
     this.next && this.next()
 
-    function requireLogin() {
-      var exceptedRoutes = ['/sign-in', '/sign-up', '/forgot-password']
-      var path = window.location.pathname
-      if (!_(exceptedRoutes).contains(path) && !/\/reset-password\/.*/.test(path)) {
-        AccountsEntry.signInRequired(_this)
-      }
-    }
-
     function onlyAllowDirectivesAndTeachersOnAdmin() {
       if (onAdminRoute()) {
         if (!_(['directive', 'teacher']).contains(getRole(Meteor.userId()))) {
@@ -52,11 +36,6 @@ Router.configure({
     function onAdminRoute() {
       var _path = _(window.location.pathname.split('/'))
       return _path.contains('admin')
-    }
-
-    function onSessionRoute() {
-      var path = Router.current().route.path()
-      return path == '/sign-in'
     }
 
     function authCreateEdit() {
@@ -75,26 +54,22 @@ Router.configure({
       }
     }
 
-    function hide_register_section_on_sign_in() {
-      $('.entry-signup-cta').hide()
+    function normalize_admin_navbar() {
+      $('.admin-layout [role="navigation"]').css('width', 'inherit')
     }
   }
 })
 
+Router.plugin('ensureSignedIn', {
+  except: ['atSignIn', 'atForgotPassword', 'atResetPwd']
+});
+
 Router.route('/', {
-  template: 'custom_view',
-  controller: PreloadController,
-  preload: {
-    styles: '/materialize/css/materialize.min.css'
-  }
+  template: 'custom_view'
 })
 
 Router.route('/asistencias', {
-  template: 'attendances_read_only',
-  controller: PreloadController,
-  preload: {
-    styles: '/materialize/css/materialize.min.css'
-  }
+  template: 'attendances_read_only'
 })
 
 Router.route('/home', function() {
