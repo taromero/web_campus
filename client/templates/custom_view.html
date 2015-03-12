@@ -1,5 +1,11 @@
-<template name='custom_view'>
+<head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" sizes="192x192" href="images/mobile-desktop-logo.png">
+</head>
+
+<template name='custom_view'>
   {{>connectionBanner}}
   {{> custom_view_header}}
   <div class='accordion_container' style='margin-left:1rem;margin-right:1rem'>
