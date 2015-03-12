@@ -1,5 +1,6 @@
 var isLoggedIn = Meteor.userId()
 Router.configure({
+  loadingTemplate: 'loading',
   onBeforeAction: function() {
     var _this = this
     collapsibleInitialized = false
