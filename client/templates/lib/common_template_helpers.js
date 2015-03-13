@@ -18,8 +18,16 @@ Template.registerHelper('hideIf', function(condition) {
   }
 });
 
+Template.registerHelper('contentEditableForDirectives', function() {
+  return { contentEditable: isDirective() ? 'true' : 'false' }
+})
+
 Template.registerHelper('adminAllowed', function() {
-  return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
+  return isAdmin()
+})
+
+Template.registerHelper('isDirective', function() {
+  return isDirective()
 })
 
 Template.registerHelper('parent', function() {
@@ -47,3 +55,12 @@ initializeCollapsibleAndTabs = function() {
     }
   }
 }
+
+function isAdmin() {
+  return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
+}
+
+function isDirective() {
+  return getRole(Meteor.userId()) == 'directive'
+}
+

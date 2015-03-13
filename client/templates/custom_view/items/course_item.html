@@ -17,9 +17,37 @@
           <ul class="collapsible" data-collapsible="expandable">
             {{#each courseStudents _id}}
               <li>
-              <a href='#student_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-action-account-box"></i>{{profile.lastName}}, {{profile.firstName}}</a>
+                <div class="collapsible-header"><i class="mdi-action-account-box"></i>{{profile.lastName}}, {{profile.firstName}}</div>
+                <div class="collapsible-body">
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col s12 m3'>
+                        <div class='card-panel teal white-text'>
+                          <div class='row'>
+                            <span>Email: </span>
+                            <p style='padding:0'>{{email.address}}</p>
+                          </div>
+                          <div class='row'>
+                            <span>DNI: </span>
+                            <p style='padding:0'>{{profile.document_id}}</p>
+                          </div>
+                          <div class='row'>
+                            <span>Nacimiento: </span>
+                            <p style='padding:0'>{{formatDate profilebirthday}}</p>
+                          </div>
+                          <div class='row'>
+                            <span>Telefono: </span>
+                              <p style='padding:0'>{{profile.phoneNumber}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class='col s12 m9'>
+                        {{> score_card student_id=_id}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
-              {{> student_modal student=this}}
             {{/each}}
           </ul>
         </div>

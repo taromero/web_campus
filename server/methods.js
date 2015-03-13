@@ -47,6 +47,9 @@ Meteor.methods({
     var resource = Resources.findOne(resourceId)
     s3.deleteFile(resource.url)
     Resources.remove(resourceId)
+  },
+  createScoreCard: function(studentId) {
+    return ScoreCards.createFor(studentId)
   }
 })
 
