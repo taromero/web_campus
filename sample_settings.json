@@ -1,12 +1,4 @@
 {
-  "public":{
-    "connectionBanner":{
-      "connectionLostText":"Se perdio la conexion con el servidor!",
-      "tryReconnectText":"Intentar reconectar ahora",
-      "reconnectBeforeCountdownText":"Tratando de reconectar en ",
-      "reconnectAfterCountdownText":"segundos."
-    }
-  },
   "AWSAccessKeyId": "",
   "AWSSecretAccessKey": "",
   "s3": {
