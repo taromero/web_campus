@@ -15,7 +15,7 @@ Router.route('/home', function() {
 })
 
 Router.route('/boletin', {
-  template: 'score_card'
+  template: 'score_card_with_header'
 })
 
 var isLoggedIn = Meteor.userId()
