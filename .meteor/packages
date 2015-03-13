@@ -19,7 +19,6 @@ alanning:roles
 anti:fake
 yogiben:autoform-file
 mrt:moment
-natestrauser:connection-banner
 edgee:slingshot
 rainhaven:s3
 meteorhacks:kadira
@@ -28,4 +27,5 @@ email
 useraccounts:materialize
 materialize:materialize
 pcel:loading
+canotto90:meteor-status
 
