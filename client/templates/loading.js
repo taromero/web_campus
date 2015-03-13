@@ -1,4 +1,4 @@
-var spinner = '<div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>'
+var spinner = '<div class="loading-spinner"><div class="dot1"></div><div class="dot2"></div></div>'
 
 Template.loading.rendered = function() {
   if (!Session.get('loadingSplash')) {
