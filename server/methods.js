@@ -47,6 +47,11 @@ Meteor.methods({
     var resource = Resources.findOne(resourceId)
     s3.deleteFile(resource.url)
     Resources.remove(resourceId)
+  },
+  updateScoreCard: function(periodScores) {
+    periodScores.forEach(function(ps) {
+      PeriodsScores.update(ps.period_score_id, { $set: { score: ps.score } })
+    })
   }
 })
 

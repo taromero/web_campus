@@ -1,3 +1,23 @@
+Router.plugin('ensureSignedIn', {
+  except: ['atSignIn', 'atForgotPassword', 'atResetPwd']
+});
+
+Router.route('/', {
+  template: 'custom_view'
+})
+
+Router.route('/asistencias', {
+  template: 'attendances_read_only'
+})
+
+Router.route('/home', function() {
+  this.redirect('/')
+})
+
+Router.route('/boletin', {
+  template: 'score_card'
+})
+
 var isLoggedIn = Meteor.userId()
 Router.configure({
   loadingTemplate: 'loading',
@@ -59,21 +79,5 @@ Router.configure({
       $('.admin-layout [role="navigation"]').css('width', 'inherit')
     }
   }
-})
-
-Router.plugin('ensureSignedIn', {
-  except: ['atSignIn', 'atForgotPassword', 'atResetPwd']
-});
-
-Router.route('/', {
-  template: 'custom_view'
-})
-
-Router.route('/asistencias', {
-  template: 'attendances_read_only'
-})
-
-Router.route('/home', function() {
-  this.redirect('/')
 })
 

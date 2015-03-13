@@ -22,6 +22,8 @@ RoleAbilities.apply = function() {
       if (hasDefinedAbilities(role, collection, 'save')) {
         return RoleAbilities[role].abilities[collection.name].save(user, doc)
       } else {
+        console.log('Collection', collection.name)
+        console.log('doc', doc)
         throw 'User not allowed to insert'
       }
     })
