@@ -91,8 +91,7 @@ function saveAttendances() {
   Meteor.call('saveAttendances', attendances, function(error, msg) {
     swal({
       title: 'Asistencia Guardada!',
-      type: 'success',
-      html: true
+      type: 'success'
     })
     $('.attendance-progress').hide()
   })

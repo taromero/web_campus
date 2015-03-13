@@ -48,8 +48,10 @@ Meteor.methods({
     s3.deleteFile(resource.url)
     Resources.remove(resourceId)
   },
-  createScoreCard: function(studentId) {
-    return ScoreCards.createFor(studentId)
+  updateScoreCard: function(periodScores) {
+    periodScores.forEach(function(ps) {
+      PeriodsScores.update(ps.period_score_id, { $set: { score: ps.score } })
+    })
   }
 })
 

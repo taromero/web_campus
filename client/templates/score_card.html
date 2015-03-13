@@ -1,29 +1,30 @@
 <template name='score_card'>
   <div class="table-responsive container">
+    <div class="progress score-card-progress" style='display:none'>
+      <div class="indeterminate"></div>
+    </div>
     {{#if isDirective}}
       <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="waves-effect waves-circle waves-light btn-floating btn-large red" id='save-attendances'>
+        <a class="waves-effect waves-circle waves-light btn-floating btn-large red" id='update-score-card'>
           <i class="mdi-action-done-all"></i>
         </a>
       </div>
     {{/if}}
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped score-card-table" id='{{score_card._id}}'>
       <thead>
         <tr>
           <th></th>
-          <th>1er</th>
-          <th>2ndo</th>
-          <th>3er</th>
-          <th>Integradora</th>
-          <th>Nota Final</th>
+          {{#each periods}}
+          <th>{{this}}</th>
+          {{/each}}
         </tr>
       </thead>
       <tbody>
         {{#each score_card.subjects}}
-          <tr data-subject-period-id='{{_id}}'>
+          <tr>
             <th class="text-nowrap" scope="row">{{name}}</th>
             {{#each periods_scores}}
-            <td {{contentEditableForDirectives}} data-period='{{period}}'>{{score}}</td>
+              <td {{contentEditableForDirectives}} id='{{_id}}' class='score-cell'>{{score}}</td>
             {{/each}}
           </tr>
         {{/each}}
