@@ -9,10 +9,3 @@ Template.course_item.helpers({
   }
 })
 
-// Temporal solution until https://github.com/d0minikk/materialize-meteor/issues/10 is solved.
-// If I try to append this behavoiur to the courses accordion template (without implementing the
-// course_item template) it doesn't work sometimes.
-Template.course_item.rendered = function() {
-  initializeCollapsibleAndTabs()
-}
-

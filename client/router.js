@@ -1,3 +1,5 @@
+var subs = new SubsManager()
+
 Router.plugin('ensureSignedIn', {
   except: ['atSignIn', 'atForgotPassword', 'atResetPwd']
 });
@@ -17,16 +19,22 @@ Router.route('/boletin', {
   waitOn: subscriptions
 })
 
-collapsibleInitialized = false
 Router.configure({
   loadingTemplate: 'loading'
 })
 
+
 function subscriptions() {
-  return Collections.map(function(collection) {
-      return Meteor.subscribe(collection.name)
-    }).concat([
-      Meteor.subscribe('Users'),
-      Meteor.subscribe('attendances_for_student')
-    ])
+  return [
+    subs.subscribe('Users'),
+    subs.subscribe('Subjects'),
+    subs.subscribe('attendances_for_student'),
+    subs.subscribe('Exams'),
+    subs.subscribe('Courses'),
+    subs.subscribe('ScoreCards'),
+    subs.subscribe('Resources'),
+    subs.subscribe('ScoreCardSubjects'),
+    subs.subscribe('PeriodsScores'),
+    subs.subscribe('ExamScores')
+  ]
 }

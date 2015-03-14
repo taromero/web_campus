@@ -35,9 +35,6 @@ Template.registerHelper('parent', function() {
 })
 
 initializeCollapsibleAndTabs = function() {
-  if (collapsibleInitialized) {
-    return
-  }
   $('.collapsible').collapsible()
   // Workaround to avoid run condition between meteor and materialize
   // unbind and bind to prevent multiple bindings to the same event handler

@@ -15,10 +15,6 @@ Template.subject_item.helpers({
   }
 })
 
-Template.subject_item.rendered = function() {
-  initializeCollapsibleAndTabs()
-}
-
 Template.subject_item.events({
   'click .deleteResource': function(event) {
     var id = event.currentTarget.id
