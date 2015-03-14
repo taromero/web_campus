@@ -3,34 +3,30 @@ Router.plugin('ensureSignedIn', {
 });
 
 Router.route('/', {
-  template: 'custom_view'
+  template: 'custom_view',
+  waitOn: subscriptions
 })
 
 Router.route('/asistencias', {
-  template: 'attendances_read_only'
+  template: 'attendances_read_only',
+  waitOn: subscriptions
 })
 
 Router.route('/boletin', {
-  template: 'score_card_with_header'
+  template: 'score_card_with_header',
+  waitOn: subscriptions
 })
 
-var isLoggedIn = Meteor.userId()
+collapsibleInitialized = false
 Router.configure({
-  loadingTemplate: 'loading',
-  onBeforeAction: function() {
-    var _this = this
-    collapsibleInitialized = false
-
-    this.waitOn = function() {
-      return Collections.map(function(collection) {
-        return Meteor.subscribe(collection.name)
-      }).concat([
-        Meteor.subscribe('Users'),
-        Meteor.subscribe('attendances_for_student')
-      ])
-    }
-
-    this.next && this.next()
-  }
+  loadingTemplate: 'loading'
 })
 
+function subscriptions() {
+  return Collections.map(function(collection) {
+      return Meteor.subscribe(collection.name)
+    }).concat([
+      Meteor.subscribe('Users'),
+      Meteor.subscribe('attendances_for_student')
+    ])
+}
