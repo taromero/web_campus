@@ -1,13 +1,4 @@
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" sizes="192x192" href="images/mobile-desktop-logo.png">
-</head>
-
 <template name='custom_view'>
-  {{> meteorStatus}}
-  {{> custom_view_header}}
   <div class='accordion_container' style='margin-left:1rem;margin-right:1rem'>
     {{#if isTeacherOrDirective}}
       {{> courses_accordion}}
@@ -21,34 +12,5 @@
   </div>
   <div id='exam-score-modal-container'>
   </div>
-</template>
-
-<template name='custom_view_header'>
-  <nav>
-    <a href="/" class="brand-logo hide-on-med-and-down">Web Campus</a>
-    <ul class="right hide-on-med-and-down">
-      {{> header_links}}
-    </ul>
-    <ul id="slide-out" class="side-nav">
-      {{> header_links}}
-    </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-  </nav>
-</template>
-
-<template name='header_links'>
-  <li><a href="/">Home</a></li>
-  <li {{hideIf adminAllowed}}><a href="/asistencias">Asistencias</a></li>
-  <li {{hideIf adminAllowed}}><a href="/boletin">Boletin</a></li>
-  <li><a href="" id='sign-out'>Salir</a></li>
-</template>
-
-<template name='tabHeader'>
-  <li class="tab col s3">
-    <a class='{{class}}' href="{{href}}{{id}}">
-      <div class='hide-on-med-and-down'>{{l_label}}</div>
-      <div class='hide-on-large-only'><i class="{{s_label}} small"></i></div>
-    </a>
-  </li>
 </template>
 

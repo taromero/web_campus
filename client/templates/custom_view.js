@@ -24,14 +24,3 @@ function roleIn(roleArray) {
   }
 }
 
-Template.custom_view_header.rendered = function() {
-  $(".button-collapse").sideNav({ closeOnClick: true })
-  $('.modal-trigger').leanModal()
-}
-
-Template.header_links.events({
-  'click #sign-out': function() {
-    Meteor.logout()
-  }
-})
-
