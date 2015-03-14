@@ -6,17 +6,21 @@ Router.plugin('ensureSignedIn', {
 
 Router.route('/', {
   template: 'custom_view',
-  waitOn: subscriptions
+  waitOn: subscriptions,
+  fastRender: true
 })
 
 Router.route('/asistencias', {
   template: 'attendances_read_only',
-  waitOn: subscriptions
+  waitOn: subscriptions,
+  fastRender: true
+
 })
 
 Router.route('/boletin', {
   template: 'score_card_with_header',
-  waitOn: subscriptions
+  waitOn: subscriptions,
+  fastRender: true
 })
 
 Router.configure({

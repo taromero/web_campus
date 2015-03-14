@@ -24,4 +24,5 @@ materialize:materialize
 pcel:loading
 canotto90:meteor-status
 meteorhacks:subs-manager
+meteorhacks:fast-render
 
