@@ -5,6 +5,7 @@ Router.plugin('ensureSignedIn', {
 });
 
 Router.route('/', {
+  name: 'root',
   template: 'custom_view',
   waitOn: subscriptions,
   layoutTemplate: 'layout'
@@ -22,10 +23,22 @@ Router.route('/boletin', {
   layoutTemplate: 'layout'
 })
 
+Router.route('/clases/:name', {
+  name: 'course_item',
+  template: 'wrapped_course_item',
+  waitOn: subscriptions,
+  layoutTemplate: 'layout',
+  data: function() {
+    var name = underscoresToSpaces(this.params.name)
+    Session.set('main_title', name)
+    var course = Courses.findOne({ name: name })
+    return course
+  }
+})
+
 Router.configure({
   loadingTemplate: 'loading'
 })
-
 
 function subscriptions() {
   return [

@@ -10,3 +10,12 @@ Template.header_links.events({
   }
 })
 
+
+Template.header.helpers({
+  main_title: function() {
+    return Session.get('main_title') || 'Web Campus'
+  }
+})
+
+Template.layout.events(Velociratchet.events);
+Template.layout.helpers(Velociratchet.helpers);

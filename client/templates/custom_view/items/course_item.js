@@ -9,3 +9,7 @@ Template.course_item.helpers({
   }
 })
 
+Template.course_item.rendered = function() {
+  $('ul.tabs').first().tabs()
+}
+

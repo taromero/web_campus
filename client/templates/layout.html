@@ -6,25 +6,32 @@
 </head>
 
 <template name="layout">
-  <div class='main'>
     {{> meteorStatus}}
-    {{> header}}
-    {{>yield}}
-  </div>
+    {{#momentum plugin='iron-router' options=transition}}
+      {{> header}}
+      {{> yield}}
+    {{/momentum}}
 </template>
 
 <template name='header'>
   <nav>
     <div class='nav-wrapper'>
-      <a href="/" class="brand-logo center">Web Campus</a>
-      <ul id='slide-out' class="side-nav hide-on-large-only">
+      <ul class='back-button'>
+        {{#if getPreviousPage != ''}}
+        <li>
+          <a href="{{pathFor getPreviousPage}}" class="icon icon-left-nav pull-left" velociratchet-transition="left" style='font-size:4rem'></a>
+        </li>
+        {{/if}}
+      </ul>
+      <a href="/" class="brand-logo center flow-text">{{main_title}}</a>
+      <ul id='slide-out' class="side-nav hide-on-large-only right">
         {{> header_links}}
       </ul>
       <ul id="slide-out-large" class="side-nav fixed hide-on-med-and-down">
         {{> header_links}}
       </ul>
-      <a href="#" data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="mdi-navigation-menu"></i></a>
-      <a href="#" data-activates="slide-out-large" class="button-collapse hide-on-med-and-down"><i class="mdi-navigation-menu"></i></a>
+      <a href="#" data-activates="slide-out" class="button-collapse hide-on-large-only right"><i class="mdi-navigation-menu"></i></a>
+      <a href="#" data-activates="slide-out-large" class="button-collapse hide-on-med-and-down right"><i class="mdi-navigation-menu"></i></a>
     </div>
   </nav>
 </template>

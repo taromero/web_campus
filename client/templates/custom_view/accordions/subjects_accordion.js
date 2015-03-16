@@ -5,6 +5,6 @@ Template.subjects_accordion.helpers({
 })
 
 Template.subjects_accordion.rendered = function() {
-  initializeCollapsibleAndTabs()
+  $('.collapsible').collapsible()
 }
 

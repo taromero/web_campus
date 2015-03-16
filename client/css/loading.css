@@ -1,3 +1,13 @@
+.pg-loading-screen {
+  margin-top: 64px;
+}
+
+@media only screen and (min-width : 992px) {
+  .pg-loading-screen {
+    margin-left: 240px;
+  }
+}
+
 .loading-spinner {
   margin: 100px auto;
   width: 40px;
@@ -15,7 +25,7 @@
   display: inline-block;
   position: absolute;
   top: 0;
-  background-color: #fff;
+  background-color: rgb(238, 110, 115);
   border-radius: 100%;
   
   -webkit-animation: bounce 2.0s infinite ease-in-out;
