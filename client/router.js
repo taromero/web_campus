@@ -34,7 +34,8 @@ Router.route('/clases/:name', {
     return [
       subs.subscribe('Users'),
       subs.subscribe('Courses'),
-      subs.subscribe('Subjects')
+      subs.subscribe('Subjects'),
+      subs.subscribe('attendances_for_student')
     ]
   },
   layoutTemplate: 'layout',
@@ -55,7 +56,11 @@ Router.route('/clases/:course_name/materias/:subject_name', {
     return [
       subs.subscribe('Courses'),
       subs.subscribe('Subjects'),
-      subs.subscribe('Exams')
+      subs.subscribe('Exams'),
+      subs.subscribe('Resources'),
+      subs.subscribe('ScoreCardSubjects'),
+      subs.subscribe('PeriodsScores'),
+      subs.subscribe('ExamScores')
     ]
   },
   layoutTemplate: 'layout',
