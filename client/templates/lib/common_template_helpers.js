@@ -51,7 +51,6 @@ initializeTabs = function(template) {
     setTimeout(_initializeTabs, 200)
 
     function __initializeTabs() {
-      console.log('aa')
       template.$('ul.tabs.subjectTabs').first().tabs()
     }
   }

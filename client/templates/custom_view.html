@@ -4,7 +4,7 @@
       {{> courses_accordion}}
     {{else}}
       {{#if isParent}}
-        {{> students_accordion}}
+        {{> dependants_accordion}}
       {{else}}
         {{> subjects_accordion course_id=user.course_id}}
       {{/if}}

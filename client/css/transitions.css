@@ -1,0 +1,4 @@
+/* Hide right arrows  */
+.push-right:after {
+  display: none !important;
+}

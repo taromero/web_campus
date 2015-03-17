@@ -7,7 +7,11 @@ Router.plugin('ensureSignedIn', {
 Router.route('/', {
   name: 'root',
   template: 'custom_view',
-  waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('Courses')
+    ]
+  },
   layoutTemplate: 'layout'
 })
 
@@ -26,9 +30,17 @@ Router.route('/boletin', {
 Router.route('/clases/:name', {
   name: 'course_item',
   template: 'wrapped_course_item',
-  waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('Users'),
+      subs.subscribe('Courses'),
+      subs.subscribe('Subjects')
+    ]
+  },
   layoutTemplate: 'layout',
   data: function() {
+    studentsTabRendered = false
+    attendancesTabRendered = false
     var name = underscoresToSpaces(this.params.name)
     Session.set('main_title', name)
     var course = Courses.findOne({ name: name })

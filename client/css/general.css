@@ -1,0 +1,8 @@
+.student-detail-panel span {
+  text-decoration: underline;
+}
+
+.student-detail-panel p {
+  color: white;
+  padding: 0;
+}
