@@ -1,3 +1,8 @@
+body {
+  /* transitions plugin changes the font */
+  font-family: "Roboto", sans-serif;
+}
+
 .student-detail-panel span {
   text-decoration: underline;
 }
