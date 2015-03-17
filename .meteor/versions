@@ -13,6 +13,7 @@ blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
 canotto90:meteor-status@1.1.1
+canotto90:velociratchet@2.1.0
 check@1.0.4
 coffeescript@1.0.5
 ddp@1.0.14
@@ -83,4 +84,3 @@ useraccounts:core@1.8.1
 useraccounts:materialize@1.8.1
 webapp@1.1.6
 webapp-hashing@1.0.2
-zendy:velociratchet@2.0.0
