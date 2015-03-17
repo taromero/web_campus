@@ -1,16 +1,12 @@
 <template name='custom_view'>
-  <div class='accordion_container'>
-    {{#if isTeacherOrDirective}}
-      {{> courses_accordion}}
+  {{#if isTeacherOrDirective}}
+    {{> courses_accordion}}
+  {{else}}
+    {{#if isParent}}
+      {{> dependants_accordion}}
     {{else}}
-      {{#if isParent}}
-        {{> dependants_accordion}}
-      {{else}}
-        {{> subjects_accordion course_id=user.course_id}}
-      {{/if}}
+      {{> subjects_accordion course_id=user.course_id}}
     {{/if}}
-  </div>
-  <div id='exam-score-modal-container'>
-  </div>
+  {{/if}}
 </template>
 

@@ -29,7 +29,7 @@ Router.route('/boletin', {
 
 Router.route('/clases/:name', {
   name: 'course_item',
-  template: 'wrapped_course_item',
+  template: 'course_item',
   waitOn: function() {
     return [
       subs.subscribe('Users'),
@@ -40,12 +40,14 @@ Router.route('/clases/:name', {
   },
   layoutTemplate: 'layout',
   data: function() {
-    studentsTabRendered = false
-    attendancesTabRendered = false
-    var name = underscoresToSpaces(this.params.name)
-    Session.set('main_title', name)
-    var course = Courses.findOne({ name: name })
-    return course
+    if (this.ready()) {
+      studentsTabRendered = false
+      attendancesTabRendered = false
+      var name = underscoresToSpaces(this.params.name)
+      Session.set('main_title', name)
+      var course = Courses.findOne({ name: name })
+      return course
+    }
   }
 })
 
