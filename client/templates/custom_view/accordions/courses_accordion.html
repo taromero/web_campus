@@ -3,7 +3,8 @@
     <div class="collection" style="margin-left: 1.75rem;margin-right: 1.75rem;">
       {{#each courses}}
       <a href="/clases/{{spacesForUnderscores name}}" class="collection-item push-right navigate-right">
-          <i class="mdi-action-account-balance"></i>{{name}}
+          <i class="mdi-action-account-balance"></i>
+          <span>{{name}}</span>
           <div class='icon icon-right-nav right'></div>
         </a>
       {{/each}}

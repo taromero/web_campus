@@ -10,14 +10,15 @@
           </ul>
         </div>
         <div id="exams{{_id}}" class="col s12">
-          <ul class="collapsible" data-collapsible="expandable">
+          <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
             {{#each exams _id}}
-              <li>
-                <a href='#exam_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-content-content-paste"></i>{{title}}</a>
-              </li>
-              {{> exam_modal exam=this}}
+              <a href="" class="collection-item push-right navigate-right">
+                <i class="mdi-content-content-paste"></i>
+                <span>{{title}}</span>
+                <div class='icon icon-right-nav right'></div>
+              </a>
             {{/each}}
-          </ul>
+          </div>
         </div>
         <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
         <div id="resources{{_id}}" class="col s12">

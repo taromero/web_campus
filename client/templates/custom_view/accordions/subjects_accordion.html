@@ -2,7 +2,8 @@
   <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
     {{#each subjects}}
       <a href="/clases/{{spacesForUnderscores course.name}}/materias/{{spacesForUnderscores name}}" class="collection-item push-right navigate-right">
-        <i class="mdi-action-account-balance"></i>{{name}}
+        <i class="mdi-action-class"></i>
+        <span>{{name}}</span>
         <div class='icon icon-right-nav right'></div>
       </a>
     {{/each}}

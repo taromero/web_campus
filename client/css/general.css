@@ -11,3 +11,19 @@ body {
   color: white;
   padding: 0;
 }
+
+.collection-item {
+  padding-top: 21px !important
+}
+
+.collection-item span {
+  vertical-align: super
+}
+
+.collection-item i {
+  vertical-align: super
+}
+
+.collection-item .icon-right-nav {
+  vertical-align: super
+}
