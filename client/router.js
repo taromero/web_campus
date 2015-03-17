@@ -48,6 +48,30 @@ Router.route('/clases/:name', {
   }
 })
 
+Router.route('/clases/:course_name/materias/:subject_name', {
+  name: 'subject_item',
+  template: 'subject_item',
+  waitOn: function() {
+    return [
+      subs.subscribe('Courses'),
+      subs.subscribe('Subjects'),
+      subs.subscribe('Exams')
+    ]
+  },
+  layoutTemplate: 'layout',
+  data: function() {
+    if (this.ready()) {
+      var course_name = underscoresToSpaces(this.params.course_name)
+      var subject_name = underscoresToSpaces(this.params.subject_name)
+
+      Session.set('main_title', subject_name)
+      var clazz = Courses.findOne({ name: course_name})
+      var subject = Subjects.findOne({ name: subject_name, course_id: clazz._id })
+      return { subject_id: subject._id }
+    }
+  }
+})
+
 Router.configure({
   loadingTemplate: 'loading'
 })

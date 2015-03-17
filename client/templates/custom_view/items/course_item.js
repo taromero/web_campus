@@ -1,6 +1,6 @@
 Template.course_item.rendered = function() {
-  Blaze.renderWithData(Template.subjects_accordion, { course_id: this.data._id }, $('#subjects' + this.data._id)[0])
   $('ul.tabs').tabs()
+  Blaze.renderWithData(Template.subjects_accordion, { course_id: this.data._id }, $('#subjects' + this.data._id)[0])
 }
 
 Template.course_item.events({

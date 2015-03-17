@@ -1,10 +1,10 @@
 <template name='subjects_accordion'>
-  <ul class="collapsible" data-collapsible="expandable">
+  <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
     {{#each subjects}}
-      <li>
-        <div class="collapsible-header"><i class="mdi-action-class"></i>{{name}}</div>
-        <div class="collapsible-body">{{> subject_item subject_id=_id}}</div>
-      </li>
+      <a href="/clases/{{spacesForUnderscores course.name}}/materias/{{spacesForUnderscores name}}" class="collection-item push-right navigate-right">
+        <i class="mdi-action-account-balance"></i>{{name}}
+        <div class='icon icon-right-nav right'></div>
+      </a>
     {{/each}}
-  </ul>
+  </div>
 </template>

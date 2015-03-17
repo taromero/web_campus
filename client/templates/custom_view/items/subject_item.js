@@ -39,3 +39,7 @@ Template.subject_item.events({
   }
 })
 
+Template.subject_item.rendered = function() {
+  $('ul.tabs').tabs()
+}
+
