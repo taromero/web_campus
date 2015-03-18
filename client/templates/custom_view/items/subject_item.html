@@ -12,7 +12,7 @@
         <div id="exams{{_id}}" class="col s12">
           <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
             {{#each exams _id}}
-              <a href="" class="collection-item push-right navigate-right">
+            <a href="{{currentPath}}/examenes/{{spacesForUnderscores title}}" class="collection-item push-right navigate-right">
                 <i class="mdi-content-content-paste"></i>
                 <span>{{title}}</span>
                 <div class='icon icon-right-nav right'></div>

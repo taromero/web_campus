@@ -1,16 +1,21 @@
 Meteor.methods({
-  upsertScores: function(params) {
-    var selector = { student_id: params.student_id, exam_id: params.exam_id }
-    var data = {
-      student_id: params.student_id,
-      exam_id: params.exam_id,
-      score: params.score
-    }
-    if (ExamScores.findOne(selector)) {
-      ExamScores.update(selector, { $set: data })
-    } else {
-      ExamScores.insert(data)
-    }
+  upsertScores: function(student_ids_and_scores) {
+    student_ids_and_scores.forEach(function(ss) {
+      var student_id = ss.student_id
+      var exam_id = ss.exam_id
+      var score = ss.score
+      var selector = { student_id: student_id, exam_id: exam_id }
+      var data = {
+        student_id: student_id,
+        exam_id: exam_id,
+        score: score
+      }
+      if (ExamScores.findOne(selector)) {
+        ExamScores.update(selector, { $set: data })
+      } else {
+        ExamScores.insert(data)
+      }
+    })
   },
   saveAttendances: function(attendances) {
     var course_id = Meteor.users.findOne(attendances[0].student_id).course_id

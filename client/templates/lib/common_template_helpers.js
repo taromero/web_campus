@@ -38,6 +38,10 @@ Template.registerHelper('spacesForUnderscores', function(string) {
   return string.replace(/ /g,"_")
 })
 
+Template.registerHelper('currentPath', function() {
+  return Iron.Location.get().path
+})
+
 initializeTabs = function(template) {
   // Workaround to avoid run condition between meteor and materialize
   // unbind and bind to prevent multiple bindings to the same event handler

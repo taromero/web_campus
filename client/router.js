@@ -51,6 +51,50 @@ Router.route('/clases/:name', {
   }
 })
 
+Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', {
+  name: 'exam_item',
+  template: 'exam_item',
+  waitOn: function() {
+    return [
+      subs.subscribe('Courses'),
+      subs.subscribe('Subjects'),
+      subs.subscribe('Exams')
+    ]
+  },
+  layoutTemplate: 'layout',
+  data: function() {
+    if (this.ready()) {
+      var exam = getExam(this.params)
+      Session.set('main_title', exam.title)
+      return { exam: exam }
+    }
+  }
+})
+
+Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/notas', {
+  name: 'exam_scores',
+  template: 'exam_scores',
+  waitOn: function() {
+    return [
+      subs.subscribe('Users'),
+      subs.subscribe('Courses'),
+      subs.subscribe('Courses'),
+      subs.subscribe('Subjects'),
+      subs.subscribe('Exams'),
+      subs.subscribe('ExamScores')
+    ]
+  },
+  layoutTemplate: 'layout',
+  data: function() {
+    if (this.ready()) {
+      var exam = getExam(this.params)
+      Session.set('main_title', exam.title)
+      return { exam_id: exam._id }
+    }
+  }
+})
+
+
 Router.route('/clases/:course_name/materias/:subject_name', {
   name: 'subject_item',
   template: 'subject_item',
@@ -68,16 +112,27 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var course_name = underscoresToSpaces(this.params.course_name)
-      var subject_name = underscoresToSpaces(this.params.subject_name)
-
-      Session.set('main_title', subject_name)
-      var clazz = Courses.findOne({ name: course_name})
-      var subject = Subjects.findOne({ name: subject_name, course_id: clazz._id })
+      var subject = getSubject(this.params)
+      Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }
   }
 })
+
+function getSubject(params) {
+  var course_name = underscoresToSpaces(params.course_name)
+  var subject_name = underscoresToSpaces(params.subject_name)
+
+  var clazz = Courses.findOne({ name: course_name})
+  return Subjects.findOne({ name: subject_name, course_id: clazz._id })
+}
+
+
+function getExam(params) {
+  var subject = getSubject(params)
+  var exam_title = underscoresToSpaces(params.exam_title)
+  return Exams.findOne({ subject_id: subject._id, title: exam_title })
+}
 
 Router.configure({
   loadingTemplate: 'loading'

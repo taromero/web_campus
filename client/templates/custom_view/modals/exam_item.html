@@ -1,0 +1,33 @@
+<template name='exam_item'>
+  <div class='content'>
+    {{#if adminAllowed}}
+      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a href='{{currentPath}}/notas' class="waves-effect waves-circle waves-light btn-floating btn-large red">
+          <i class="mdi-image-edit"></i>
+        </a>
+      </div>
+    {{/if}}
+    {{#with exam}}
+      <div class='container'>
+        <div class='row'>
+          <div class='col s12'>
+            <div class="card-panel teal lighten-2 white-text">
+              <div class='row'>
+                <span>Titulo</span>
+                <p>{{title}}</p>
+              </div>
+              <div class='row'>
+                <span>Fecha</span>
+                <p>{{formatDate date}}</p>
+              </div>
+              <div class='row'>
+                <span>Descripcion</span>
+                <p>{{description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/with}}
+  </div>
+</template>
