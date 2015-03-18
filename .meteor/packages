@@ -5,6 +5,8 @@
 # but you can also edit it by hand.
 
 meteor-platform
+fastclick
+email
 
 iron:router
 accounts-base
@@ -18,7 +20,6 @@ sewdn:collection-behaviours
 mrt:moment
 edgee:slingshot
 rainhaven:s3
-email
 useraccounts:materialize
 materialize:materialize
 pcel:loading
