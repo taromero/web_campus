@@ -5,28 +5,25 @@
 # but you can also edit it by hand.
 
 meteor-platform
+fastclick
+email
 
 iron:router
 accounts-base
 accounts-password
-twbs:bootstrap
-natestrauser:font-awesome
 aldeed:simple-schema
-canotto90:admin-1.1.0-patch@0.6.1
-multiply:iron-router-progress
-sewdn:collection-behaviours
+aldeed:collection2
 alanning:roles
 anti:fake
-yogiben:autoform-file
+matb33:collection-hooks
+sewdn:collection-behaviours
 mrt:moment
 edgee:slingshot
 rainhaven:s3
-meteorhacks:kadira
-meteorhacks:zones
-email
 useraccounts:materialize
 materialize:materialize
 pcel:loading
 canotto90:meteor-status
-mixmax:smart-disconnect
+meteorhacks:subs-manager
+canotto90:velociratchet
 

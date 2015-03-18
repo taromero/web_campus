@@ -1,61 +1,17 @@
 <template name='course_item'>
-  <li>
-    <div class="collapsible-header"><i class="mdi-action-account-balance"></i>{{name}}</div>
-    <div class="collapsible-body">
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            {{> tabHeader class='active' href="#subjects" id=_id l_label="Materias" s_label="mdi-action-class"}}
-            {{> tabHeader href="#students" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
-            {{> tabHeader href="#attendances" id=_id l_label="Asistencia" s_label="mdi-action-done-all"}}
-          </ul>
-        </div>
-        <div id="subjects{{_id}}" class="col s12">
-          {{> subjects_accordion course_id=_id}}
-        </div>
-        <div id="students{{_id}}" class="col s12">
-          <ul class="collapsible" data-collapsible="expandable">
-            {{#each courseStudents _id}}
-              <li>
-                <div class="collapsible-header"><i class="mdi-action-account-box"></i>{{profile.lastName}}, {{profile.firstName}}</div>
-                <div class="collapsible-body">
-                  <div class='container'>
-                    <div class='row'>
-                      <div class='col s12 m3'>
-                        <div class='card-panel teal white-text'>
-                          <div class='row'>
-                            <span>Email: </span>
-                            <p style='padding:0'>{{email.address}}</p>
-                          </div>
-                          <div class='row'>
-                            <span>DNI: </span>
-                            <p style='padding:0'>{{profile.document_id}}</p>
-                          </div>
-                          <div class='row'>
-                            <span>Nacimiento: </span>
-                            <p style='padding:0'>{{formatDate profilebirthday}}</p>
-                          </div>
-                          <div class='row'>
-                            <span>Telefono: </span>
-                              <p style='padding:0'>{{profile.phoneNumber}}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class='col s12 m9'>
-                        {{> score_card student_id=_id}}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-        <div id="attendances{{_id}}" class="col s12">
-          {{> attendances_collection course_id=_id}}
-        </div>
+  <div class='content'>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          {{> tabHeader class='active' href="#subjects" id=_id l_label="Materias" s_label="mdi-action-class"}}
+          {{> tabHeader class='students-tab' href="#students" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
+          {{> tabHeader class='attendances-tab' href="#attendances" id=_id l_label="Asistencia" s_label="mdi-action-done-all"}}
+        </ul>
       </div>
+      <div id="subjects{{_id}}" class="col s12"></div>
+      <div id="students{{_id}}" class="col s12 students-section"></div>
+      <div id="attendances{{_id}}" class="col s12 attendances-section"></div>
     </div>
-  </li>
+  </div>
 </template>
 

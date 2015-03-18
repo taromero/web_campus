@@ -18,3 +18,7 @@ getIds = function(entity) {
   return entity._id
 }
 
+underscoresToSpaces = function(string) {
+  return string.replace(/_/g, " ")
+}
+

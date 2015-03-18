@@ -34,24 +34,24 @@ Template.registerHelper('parent', function() {
   return getRole(Meteor.userId()) == 'parent'
 })
 
-initializeCollapsibleAndTabs = function() {
-  if (collapsibleInitialized) {
-    return
-  }
-  $('.collapsible').collapsible()
+Template.registerHelper('spacesForUnderscores', function(string) {
+  return string.replace(/ /g,"_")
+})
+
+initializeTabs = function(template) {
   // Workaround to avoid run condition between meteor and materialize
   // unbind and bind to prevent multiple bindings to the same event handler
-  $('.collapsible-header').unbind('click.initializetabs').bind('click.initializetabs', initializeTabs)
+  $('.collapsible-header').unbind('click.initializetabs').bind('click.initializetabs', _initializeTabs)
 
   collapsibleInitialized = true
 
-  function initializeTabs() {
+  function _initializeTabs() {
     var that = this
-    _initializeTabs()
+    __initializeTabs()
     setTimeout(_initializeTabs, 200)
 
-    function _initializeTabs() {
-      $(that).siblings('.collapsible-body').find('ul.tabs').first().tabs()
+    function __initializeTabs() {
+      template.$('ul.tabs.subjectTabs').first().tabs()
     }
   }
 }

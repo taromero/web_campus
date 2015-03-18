@@ -1,47 +1,50 @@
 <template name="subject_item">
-  {{#with subject}}
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs">
-          {{> tabHeader class='active' href="#exams" id=_id l_label="examenes" s_label="mdi-content-content-paste"}}
-          {{> tabHeader href="#notifications" id=_id l_label="notificaciones" s_label="mdi-action-announcement"}}
-          {{> tabHeader href="#resources" id=_id l_label="Archivos" s_label="mdi-file-file-download"}}
-        </ul>
-      </div>
-      <div id="exams{{_id}}" class="col s12">
-        <ul class="collapsible" data-collapsible="expandable">
-          {{#each exams _id}}
-            <li>
-              <a href='#exam_modal{{_id}}' class="collapsible-header modal-trigger"><i class="mdi-content-content-paste"></i>{{title}}</a>
-            </li>
-            {{> exam_modal exam=this}}
-          {{/each}}
-        </ul>
-      </div>
-      <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
-      <div id="resources{{_id}}" class="col s12">
-        <div class='row'>
-          {{#if adminAllowed}}
-            <div class='col s12 m6'>
-              {{> file_upload}}
+  <div class='content'>
+    {{#with subject}}
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs subjectTabs">
+            {{> tabHeader class='active' href="#exams" id=_id l_label="examenes" s_label="mdi-content-content-paste"}}
+            {{> tabHeader href="#notifications" id=_id l_label="notificaciones" s_label="mdi-action-announcement"}}
+            {{> tabHeader href="#resources" id=_id l_label="Archivos" s_label="mdi-file-file-download"}}
+          </ul>
+        </div>
+        <div id="exams{{_id}}" class="col s12">
+          <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
+            {{#each exams _id}}
+              <a href="" class="collection-item push-right navigate-right">
+                <i class="mdi-content-content-paste"></i>
+                <span>{{title}}</span>
+                <div class='icon icon-right-nav right'></div>
+              </a>
+            {{/each}}
+          </div>
+        </div>
+        <div id="notifications{{_id}}" class="col s12">Notificaciones</div>
+        <div id="resources{{_id}}" class="col s12">
+          <div class='row'>
+            {{#if adminAllowed}}
+              <div class='col s12 m6'>
+                {{> file_upload}}
+              </div>
+            {{/if}}
+            <div {{addColumnSize adminAllowed}}>
+              <ul class="collection">
+                {{#each resources _id}}
+                  <li class='collection-item teal'>
+                    <a href="{{url}}" download="{{name}}" class="btn waves-effect waves-light"> {{name}}
+                      <i class="mdi-file-file-download"></i>
+                    </a>
+                    <span class='white-text'> Subido: {{formatDate createdAt}} </span>
+                    <a href="#!" class="secondary-content deleteResource" id='{{_id}}'><i class="small mdi-action-delete" style='color:white'></i></a>
+                  </li>
+                {{/each}}
+              </ul>
             </div>
-          {{/if}}
-          <div {{addColumnSize adminAllowed}}>
-            <ul class="collection">
-              {{#each resources _id}}
-                <li class='collection-item teal'>
-                  <a href="{{url}}" download="{{name}}" class="btn waves-effect waves-light"> {{name}}
-                    <i class="mdi-file-file-download"></i>
-                  </a>
-                  <span class='white-text'> Subido: {{formatDate createdAt}} </span>
-                  <a href="#!" class="secondary-content deleteResource" id='{{_id}}'><i class="small mdi-action-delete" style='color:white'></i></a>
-                </li>
-              {{/each}}
-            </ul>
           </div>
         </div>
       </div>
-    </div>
-  {{/with}}
+    {{/with}}
+  </div>
 </template>
 
