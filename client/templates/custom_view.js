@@ -20,7 +20,7 @@ function roleIn(roleArray) {
   }
 
   function inUserRoles(role) {
-    return _(user.roles).contains(role)
+    return user.role == role
   }
 }
 

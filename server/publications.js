@@ -1,7 +1,7 @@
 Meteor.publish('Users', function() {
   if (this.userId) {
     return Meteor.users.find({  }, {
-      fields: { profile: 1, emails: 1, roles: 1, course_id: 1, subject_ids: 1, dependant_ids: 1,
+      fields: { profile: 1, emails: 1, role: 1, course_id: 1, subject_ids: 1, dependant_ids: 1,
                 createdAt: 1, updatedAt: 1, createdBy: 1, lastUpdatedBy: 1 },
       sort: { 'profile.lastName': 1, 'profile.firstName': 1 } })
   } else {

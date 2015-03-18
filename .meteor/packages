@@ -7,13 +7,13 @@
 meteor-platform
 fastclick
 email
+coffeescript
 
 iron:router
 accounts-base
 accounts-password
 aldeed:simple-schema
 aldeed:collection2
-alanning:roles
 anti:fake
 matb33:collection-hooks
 sewdn:collection-behaviours

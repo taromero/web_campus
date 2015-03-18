@@ -4,23 +4,21 @@ RoleAbilities.apply = function() {
     collection.before.anyFind(function(userId, selector) {
       selector = selector || {}
       var user = Meteor.users.findOne(userId)
-      var role = getRole(userId)
-      if (role == 'directive') {
+      if (user.role == 'directive') {
         return;
       }
-      if (hasDefinedAbilities(role, collection, 'anyFind')) {
-        return RoleAbilities[role].abilities[collection.name].anyFind(user, selector)
+      if (hasDefinedAbilities(user.role, collection, 'anyFind')) {
+        return RoleAbilities[user.role].abilities[collection.name].anyFind(user, selector)
       }
     })
 
     collection.before.insert(function(userId, doc) {
       var user = Meteor.users.findOne(userId)
-      var role = getRole(userId)
-      if (role == 'directive') {
+      if (user.role == 'directive') {
         return;
       }
-      if (hasDefinedAbilities(role, collection, 'save')) {
-        return RoleAbilities[role].abilities[collection.name].save(user, doc)
+      if (hasDefinedAbilities(user.role, collection, 'save')) {
+        return RoleAbilities[user.role].abilities[collection.name].save(user, doc)
       } else {
         console.log('Collection', collection.name)
         console.log('doc', doc)

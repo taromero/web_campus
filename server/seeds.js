@@ -33,11 +33,9 @@ Seed = {
 var createUser  = {
   directive: function (i) {
     var directive_id = createUser._createUser(i, 'd', 'directive')
-    Roles.addUsersToRoles(directive_id, ['admin'])
   },
   teacher: function(i) {
     var teacher_id = createUser._createUser(i, 't', 'teacher')
-    Roles.addUsersToRoles(teacher_id, ['admin'])
   },
   parent: function(i) {
     var parent_id = createUser._createUser(i, 'p', 'parent')
@@ -56,12 +54,12 @@ var createUser  = {
     }})
   },
   _createUser: function(i, email, role) {
-    var user_id = Accounts.createUser({
-      email: email.indexOf('@') > -1 ? email : (email + i + '@m.com'),
-      password: '1'
+    var user_id = Meteor.users.insert({
+      emails: [ { address: email.indexOf('@') > -1 ? email : (email + i + '@m.com') } ],
+      role: role,
+      profile: Schemas.UserProfile.iterableSample(i)
     })
-    Roles.addUsersToRoles(user_id, [role])
-    Meteor.users.update(user_id, { $set: { profile: Schemas.UserProfile.iterableSample(i) } })
+    Accounts.setPassword(user_id, '1')
     return user_id
   }
 }
