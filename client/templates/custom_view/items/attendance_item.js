@@ -14,11 +14,10 @@ Template.attendance_item.helpers({
       return 'green lighten-3'
     }
   },
-  isPresent: function(state) {
-    return state == 'Presente' ? '_on' : 'off'
+  checkSwitch: function() {
+    return this.student.attendance.state == 'Presente' ? 'checked' : 'unchecked'
   },
-  hasHalfAttendance: function(state) {
-    // For some reason "on" is overrided during initialization, so we use "_on"
-    return state == 'Media Falta' ? '_on' : 'off'
+  checkHalfAttendance: function() {
+    return this.student.attendance.state == 'Media Falta' ? 'checked' : 'unchecked'
   }
 })

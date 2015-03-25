@@ -8,7 +8,7 @@
         <div class='hide-on-large-only card-panel teal left-align' style='margin:0'>{{student.profile.shortName}}</div>
       </div>
       <div class='col l3 s2'>
-        <input type="checkbox" id="{{student._id}}" class='half-attendance' value='{{hasHalfAttendance student.attendance.state}}'/>
+        <input type="checkbox" id="{{student._id}}" class='half-attendance' {{checkHalfAttendance}}/>
         <label for="{{student._id}}" class='white-text'>
           <div class='hide-on-small-only'>Media Falta</div>
         </label>
@@ -16,7 +16,7 @@
       <div class="col l3 s4 switch">
         <label class='white-text hide-on-med-and-down'>
           Ausente
-          <input type="checkbox" class='attendance-switch' value='{{isPresent student.attendance.state}}'>
+          <input type="checkbox" class='attendance-switch' {{checkSwitch}}>
           <span class="lever"></span>
           Presente
         </label>
