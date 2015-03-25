@@ -26,4 +26,6 @@
 .meteor-status {
   z-index: 9999
 }
-
+body {
+  font-family: sans-serif !important;
+}
