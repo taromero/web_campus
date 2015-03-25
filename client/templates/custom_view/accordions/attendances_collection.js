@@ -28,16 +28,13 @@ Template.attendances_collection.helpers({
 
 var preventRowColorChange = false
 Template.attendances_collection.events({
-  'click .lever': function(event) {
+  'change .attendance-switch': function(event) {
     // Apparently the switch component of Materialize doesn't change the value of the checkbox,
     // so we have to do it ourselves
-    var $switchInput = $(event.currentTarget).siblings('input')
-    var hasActivatedSwitch = _(['off', '_on']).contains($switchInput.val()) //if it was off, a click activates it
-    var newVal = !hasActivatedSwitch ? 'off' : 'on'
+    var $switchInput = $(event.currentTarget)
+    var hasActivatedSwitch = $switchInput.prop('checked')
     var $relatedHalfAttendance = $switchInput.closest('.row').find('.half-attendance')
     var collectionItem = $switchInput.closest('.collection-item')
-
-    $switchInput.val(newVal)
 
     if (preventRowColorChange) {
       preventRowColorChange = false
@@ -46,19 +43,16 @@ Template.attendances_collection.events({
       collectionItem.addClass(hasActivatedSwitch ? 'green lighten-3' : 'red lighten-2')
     }
 
-    if (hasActivatedSwitch && $relatedHalfAttendance.val() == 'on') {
+    if (hasActivatedSwitch && $relatedHalfAttendance.prop('checked')) {
       preventRowColorChange = true
       $relatedHalfAttendance.click()
     }
-
   },
-  'click .half-attendance': function(event) {
+  'change .half-attendance': function(event) {
     var $checkbox = $(event.currentTarget)
-    var hasActivatedHalfAttendance = _(['off', '_on']).contains($checkbox.val()) //if it was off, a click activates it
-    var newVal = !hasActivatedHalfAttendance ? 'off' : 'on'
+    var hasActivatedHalfAttendance = $checkbox.prop('checked')
     var $relatedSwitch = $checkbox.closest('.row').find('label:visible .attendance-switch') //label:visible is because we have 2 switches (1 for large and 1 for med-and-down)
     var collectionItem = $checkbox.closest('.collection-item')
-    $checkbox.val(newVal)
 
     if (preventRowColorChange) {
       preventRowColorChange = false
@@ -67,7 +61,7 @@ Template.attendances_collection.events({
       collectionItem.addClass(hasActivatedHalfAttendance ? 'deep-orange lighten-3' : 'red lighten-2')
     }
 
-    if (hasActivatedHalfAttendance && $relatedSwitch.val() == 'on') {
+    if (hasActivatedHalfAttendance && $relatedSwitch.prop('checked')) {
       preventRowColorChange = true
       $relatedSwitch.siblings('.lever').click()
     }
