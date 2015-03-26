@@ -4,9 +4,33 @@ Router.plugin('ensureSignedIn', {
   except: ['atSignIn', 'atForgotPassword', 'atResetPwd']
 });
 
-Router.route('/', {
-  name: 'root',
-  template: 'custom_view',
+Router.route('/', function() {
+  if (isTeacher() || isDirective()) {
+    this.redirect('/clases')
+  } else if (isParent()) {
+    this.redirect('/vista_parental')
+  } else {
+    this.redirect('/vista_estudiantil')
+  }
+})
+
+Router.route('/vista_estudiantil', {
+  waitOn: function() {
+    return [
+      subs.subscribe('Users'),
+      subs.subscribe('Courses')
+    ]
+  },
+  action: function() {
+    if (this.ready()) {
+      var course = Courses.findOne(Meteor.user().course_id)
+      this.redirect('/clases/' + spacesToUnderscores(course.name))
+    }
+  }
+})
+
+Router.route('/clases', {
+  template: 'courses_collection',
   waitOn: function() {
     return [
       subs.subscribe('Courses')
@@ -29,7 +53,6 @@ Router.route('/boletin', {
 
 Router.route('/clases/:name', {
   name: 'course_item',
-  template: 'course_item',
   waitOn: function() {
     return [
       subs.subscribe('Users'),
@@ -47,6 +70,13 @@ Router.route('/clases/:name', {
       Session.set('main_title', name)
       var course = Courses.findOne({ name: name })
       return course
+    }
+  },
+  action: function() {
+    if (isStudent()) {
+      this.render('wrapped_subjects_collection')
+    } else {
+      this.render('course_item')
     }
   }
 })

@@ -1,4 +1,4 @@
-<template name='subjects_accordion'>
+<template name='subjects_collection'>
   <div class="collection" style="margin-left: 1rem;margin-right: 1rem;">
     {{#each subjects}}
       <a href="{{currentPath}}/materias/{{spacesForUnderscores name}}" class="collection-item push-right navigate-right">
@@ -7,5 +7,11 @@
         <div class='icon icon-right-nav right'></div>
       </a>
     {{/each}}
+  </div>
+</template>
+
+<template name='wrapped_subjects_collection'>
+  <div class='content'>
+    {{> subjects_collection course_id=_id}}
   </div>
 </template>

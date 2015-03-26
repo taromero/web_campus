@@ -22,3 +22,7 @@ underscoresToSpaces = function(string) {
   return string.replace(/_/g, " ")
 }
 
+spacesToUnderscores = function(string) {
+  return string.replace(/ /g, "_")
+}
+

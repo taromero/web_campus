@@ -1,10 +1,10 @@
-Template.subjects_accordion.helpers({
+Template.subjects_collection.helpers({
   subjects: function() {
     return Subjects.find({ course_id: this.course_id })
   }
 })
 
-Template.subjects_accordion.rendered = function() {
+Template.subjects_collection.rendered = function() {
   $('.collapsible').collapsible()
 }
 

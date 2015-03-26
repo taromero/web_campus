@@ -27,3 +27,7 @@
   z-index: 9999
 }
 
+.hide {
+  display: none;
+}
+

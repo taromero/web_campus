@@ -35,7 +35,7 @@ Template.registerHelper('parent', function() {
 })
 
 Template.registerHelper('spacesForUnderscores', function(string) {
-  return string.replace(/ /g,"_")
+  return spacesToUnderscores(string)
 })
 
 Template.registerHelper('currentPath', function() {
@@ -64,7 +64,19 @@ function isAdmin() {
   return _(['directive', 'teacher']).contains(getRole(Meteor.userId()))
 }
 
-function isDirective() {
+isDirective = function() {
   return getRole(Meteor.userId()) == 'directive'
+}
+
+isTeacher= function() {
+  return getRole(Meteor.userId()) == 'teacher'
+}
+
+isParent = function() {
+  return getRole(Meteor.userId()) == 'parent'
+}
+
+isStudent = function() {
+  return getRole(Meteor.userId()) == 'student'
 }
 
