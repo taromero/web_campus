@@ -35,7 +35,7 @@ Template.registerHelper('parent', function() {
 })
 
 Template.registerHelper('spacesForUnderscores', function(string) {
-  return spacesToUnderscores(string)
+  return spacesToDashes(string)
 })
 
 Template.registerHelper('currentPath', function() {

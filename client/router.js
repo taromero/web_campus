@@ -24,7 +24,7 @@ Router.route('/vista_estudiantil', {
   action: function() {
     if (this.ready()) {
       var course = Courses.findOne(Meteor.user().course_id)
-      this.redirect('/clases/' + spacesToUnderscores(course.name))
+      this.redirect('/clases/' + spacesToDashes(course.name))
     }
   }
 })
@@ -41,13 +41,13 @@ Router.route('/clases', {
 
 Router.route('/asistencias', {
   template: 'attendances_read_only',
-  waitOn: subscriptions,
+  // waitOn: subscriptions,
   layoutTemplate: 'layout'
 })
 
 Router.route('/boletin', {
   template: 'score_card',
-  waitOn: subscriptions,
+  // waitOn: subscriptions,
   layoutTemplate: 'layout'
 })
 
@@ -55,10 +55,10 @@ Router.route('/clases/:name', {
   name: 'course_item',
   waitOn: function() {
     return [
-      subs.subscribe('Users'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('attendances_for_student')
+      subs.subscribe('Users', { course_name: this.params.name }),
+      subs.subscribe('Courses', { name: this.params.name }),
+      subs.subscribe('Subjects', { course_name: this.params.name }),
+      subs.subscribe('Attendances', { course_name: this.params.name })
     ]
   },
   layoutTemplate: 'layout',
@@ -66,7 +66,7 @@ Router.route('/clases/:name', {
     if (this.ready()) {
       studentsTabRendered = false
       attendancesTabRendered = false
-      var name = underscoresToSpaces(this.params.name)
+      var name = dashesToSpaces(this.params.name)
       Session.set('main_title', name)
       var course = Courses.findOne({ name: name })
       return course
@@ -150,8 +150,8 @@ Router.route('/clases/:course_name/materias/:subject_name', {
 })
 
 function getSubject(params) {
-  var course_name = underscoresToSpaces(params.course_name)
-  var subject_name = underscoresToSpaces(params.subject_name)
+  var course_name = dashesToSpaces(params.course_name)
+  var subject_name = dashesToSpaces(params.subject_name)
 
   var clazz = Courses.findOne({ name: course_name})
   return Subjects.findOne({ name: subject_name, course_id: clazz._id })
@@ -160,7 +160,7 @@ function getSubject(params) {
 
 function getExam(params) {
   var subject = getSubject(params)
-  var exam_title = underscoresToSpaces(params.exam_title)
+  var exam_title = dashesToSpaces(params.exam_title)
   return Exams.findOne({ subject_id: subject._id, title: exam_title })
 }
 
@@ -168,17 +168,3 @@ Router.configure({
   loadingTemplate: 'loading'
 })
 
-function subscriptions() {
-  return [
-    subs.subscribe('Users'),
-    subs.subscribe('Subjects'),
-    subs.subscribe('attendances_for_student'),
-    subs.subscribe('Exams'),
-    subs.subscribe('Courses'),
-    subs.subscribe('ScoreCards'),
-    subs.subscribe('Resources'),
-    subs.subscribe('ScoreCardSubjects'),
-    subs.subscribe('PeriodsScores'),
-    subs.subscribe('ExamScores')
-  ]
-}

@@ -1,30 +1,54 @@
-Meteor.publish('Users', function() {
-  if (this.userId) {
-    return Meteor.users.find({  }, {
-      fields: { profile: 1, emails: 1, roles: 1, course_id: 1, subject_ids: 1, dependant_ids: 1,
-                createdAt: 1, updatedAt: 1, createdBy: 1, lastUpdatedBy: 1 },
-      sort: { 'profile.lastName': 1, 'profile.firstName': 1 } })
-  } else {
-    return []
-  }
+securePublish('Users', function(opts) {
+  var selector = slugSelector(opts)
+  return Meteor.users.find(selector, {
+    fields: { profile: 1, emails: 1, roles: 1, course_id: 1, subject_ids: 1, dependant_ids: 1,
+              createdAt: 1, updatedAt: 1, createdBy: 1, lastUpdatedBy: 1 },
+    sort: { 'profile.lastName': 1, 'profile.firstName': 1 } })
 })
 
 Collections.forEach(function(collection) {
-  Meteor.publish(collection.name, function() {
+  securePublish(collection.name, function(opts) {
+    var selector = collection.defaultSelector || {}
+    _.extend(selector, idSelector(opts))
+    _.extend(selector, slugSelector(opts))
+    _.extend(selector, nameSelector(collection, opts))
+    return collection.find(selector, collection.defaultOptions)
+  })
+})
+
+function idSelector(opts) {
+  var selector = {}
+  if (opts._id) {
+    selector._id = opts._id
+  }
+  return selector
+}
+
+function nameSelector(collection, opts) {
+  var selector = {}
+  if (opts.name) {
+    var entity = collection.findOne({ name: dashesToSpaces(opts.name) })
+    selector._id = entity._id
+  }
+  return selector
+}
+
+function slugSelector(opts) {
+  var selector = {}
+  if (opts.course_name) {
+    var course = Courses.findOne({ name: dashesToSpaces(opts.course_name) })
+    selector.course_id = course._id
+  }
+  return selector
+}
+
+function securePublish(name, publishFn) {
+  Meteor.publish(name, function(opts) {
     if (this.userId) {
-      return collection.find(collection.defaultSelector || {}, collection.defaultOptions)
+      opts = opts || {}
+      return publishFn(opts)
     } else {
       return []
     }
   })
-})
-
-Meteor.publish('attendances_for_student', function() {
-  if (this.userId) {
-    // Attendances find hook takes care of publishing only relevant records
-    return Attendances.find()
-  } else {
-    return []
-  }
-})
-
+}

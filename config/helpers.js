@@ -18,11 +18,11 @@ getIds = function(entity) {
   return entity._id
 }
 
-underscoresToSpaces = function(string) {
-  return string.replace(/_/g, " ")
+dashesToSpaces = function(string) {
+  return string.replace(/-/g, " ")
 }
 
-spacesToUnderscores = function(string) {
-  return string.replace(/ /g, "_")
+spacesToDashes = function(string) {
+  return string.replace(/ /g, "-")
 }
 
