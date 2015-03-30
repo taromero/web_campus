@@ -121,32 +121,23 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   template: 'subject_item',
   waitOn: function() {
     return [
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams'),
-      subs.subscribe('Resources'),
-      subs.subscribe('ScoreCardSubjects'),
-      subs.subscribe('PeriodsScores'),
-      subs.subscribe('ExamScores')
+      subs.subscribe('Subjects', { name: this.params.subject_name }),
+      subs.subscribe('Exams', { subject_name: this.params.subject_name }),
+      subs.subscribe('Resources', { subject_name: this.params.subject_name }),
+      subs.subscribe('ScoreCardSubjects', { subject_name: this.params.subject_name }),
+      subs.subscribe('PeriodsScoresForSubject', { subject_name: this.params.subject_name} ),
+      subs.subscribe('ExamScoresForSubject', { subject_name: this.params.subject_name} )
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var subject = getSubject(this.params)
+      var subject = Subjects.findOne()
       Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }
   }
 })
-
-function getSubject(params) {
-  var course_name = dashesToSpaces(params.course_name)
-  var subject_name = dashesToSpaces(params.subject_name)
-
-  var clazz = Courses.findOne({ name: course_name})
-  return Subjects.findOne({ name: subject_name, course_id: clazz._id })
-}
 
 Router.configure({
   loadingTemplate: 'loading'

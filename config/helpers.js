@@ -19,10 +19,10 @@ getIds = function(entity) {
 }
 
 dashesToSpaces = function(string) {
-  return string.replace(/-/g, " ")
+  return string && string.replace(/-/g, " ")
 }
 
 spacesToDashes = function(string) {
-  return string.replace(/ /g, "-")
+  return string && string.replace(/ /g, "-")
 }
 
