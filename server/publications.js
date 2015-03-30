@@ -12,6 +12,7 @@ Collections.forEach(function(collection) {
     _.extend(selector, idSelector(opts))
     _.extend(selector, slugSelector(opts))
     _.extend(selector, nameSelector(collection, opts))
+    _.extend(selector, titleSelector(collection, opts))
     return collection.find(selector, collection.defaultOptions)
   })
 })
@@ -33,11 +34,24 @@ function nameSelector(collection, opts) {
   return selector
 }
 
+function titleSelector(collection, opts) {
+  var selector = {}
+  if (opts.title) {
+    var entity = collection.findOne({ title: dashesToSpaces(opts.title) })
+    selector._id = entity._id
+  }
+  return selector
+}
+
 function slugSelector(opts) {
   var selector = {}
   if (opts.course_name) {
     var course = Courses.findOne({ name: dashesToSpaces(opts.course_name) })
     selector.course_id = course._id
+  }
+  if (opts.exam_title) {
+    var exam = Exams.findOne({ title: dashesToSpaces(opts.exam_title) })
+    selector.exam_id = exam._id
   }
   return selector
 }

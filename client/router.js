@@ -73,11 +73,7 @@ Router.route('/clases/:name', {
     }
   },
   action: function() {
-    if (isStudent()) {
-      this.render('wrapped_subjects_collection')
-    } else {
-      this.render('course_item')
-    }
+    this.render(isStudent() ? 'wrapped_subjects_collection' : 'course_item')
   }
 })
 
@@ -86,15 +82,13 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', 
   template: 'exam_item',
   waitOn: function() {
     return [
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams')
+      subs.subscribe('Exams', { title: this.params.exam_title })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = getExam(this.params)
+      var exam = Exams.findOne() // there will be only 1 published exam
       Session.set('main_title', exam.title)
       return { exam: exam }
     }
@@ -106,18 +100,15 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/no
   template: 'exam_scores',
   waitOn: function() {
     return [
-      subs.subscribe('Users'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams'),
-      subs.subscribe('ExamScores')
+      subs.subscribe('Users', { course_name: this.params.course_name }),
+      subs.subscribe('Exams', { title: this.params.exam_title }),
+      subs.subscribe('ExamScores', { exam_title: this.params.exam_title })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = getExam(this.params)
+      var exam = Exams.findOne()
       Session.set('main_title', exam.title)
       return { exam_id: exam._id }
     }
@@ -155,13 +146,6 @@ function getSubject(params) {
 
   var clazz = Courses.findOne({ name: course_name})
   return Subjects.findOne({ name: subject_name, course_id: clazz._id })
-}
-
-
-function getExam(params) {
-  var subject = getSubject(params)
-  var exam_title = dashesToSpaces(params.exam_title)
-  return Exams.findOne({ subject_id: subject._id, title: exam_title })
 }
 
 Router.configure({
