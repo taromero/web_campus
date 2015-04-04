@@ -41,7 +41,11 @@ Router.route('/clases', {
 
 Router.route('/asistencias', {
   template: 'attendances_read_only',
-  // waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('Attendances', { student_id: Meteor.userId() })
+    ]
+  },
   layoutTemplate: 'layout'
 })
 
