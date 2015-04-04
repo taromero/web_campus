@@ -16,14 +16,19 @@ Template.file_upload.events({
           $base.find('.progress').hide()
         })
       } else {
+        if (err.error == 'Aborted') {
+          return; // if user has aborted the upload, don't show error
+        }
         swal({ title: 'Error al subir el archivo', text: err.message, type: 'error' })
       }
     });
   },
   'click #cancel_upload': function(event) {
+    uploader.xhr.abort()
     Session.set('file_name', null)
     var $base = $(event.currentTarget).closest('.container')
     $base.find('.showOnSelectedFile').hide()
+    $base.find('.progress').hide()
   }
 })
 
