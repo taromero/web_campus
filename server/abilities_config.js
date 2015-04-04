@@ -3,7 +3,7 @@ RoleAbilities.apply = function() {
   Collections.forEach(function(collection) {
     collection.before.anyFind(function(userId, selector) {
       if (!userId) {
-        throw "Necesitas tener una session"
+        console.error('Error tratando de buscar ' + collection.name + '. Necesitas tener una session.')
       }
       selector = selector || {}
       var user = Meteor.users.findOne(userId)
