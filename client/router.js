@@ -24,7 +24,7 @@ Router.route('/vista_estudiantil', {
   action: function() {
     if (this.ready()) {
       var course = Courses.findOne(Meteor.user().course_id)
-      this.redirect('/clases/' + spacesToUnderscores(course.name))
+      this.redirect('/clases/' + spacesToDashes(course.name))
     }
   }
 })
@@ -39,15 +39,26 @@ Router.route('/clases', {
   layoutTemplate: 'layout'
 })
 
-Router.route('/asistencias', {
+Router.route('/asistencias/:document_id', {
   template: 'attendances_read_only',
-  waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('Attendances', { document_id: this.params.document_id })
+    ]
+  },
   layoutTemplate: 'layout'
 })
 
-Router.route('/boletin', {
+Router.route('/boletin/:document_id', {
   template: 'score_card',
-  waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('ScoreCards', { document_id: this.params.document_id }),
+      subs.subscribe('ScoreCardSubjectsForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('PeriodsScoresForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('SubjectsForStudent', { document_id: this.params.document_id })
+    ]
+  },
   layoutTemplate: 'layout'
 })
 
@@ -55,10 +66,10 @@ Router.route('/clases/:name', {
   name: 'course_item',
   waitOn: function() {
     return [
-      subs.subscribe('Users'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('attendances_for_student')
+      subs.subscribe('Users', { course_name: this.params.name }),
+      subs.subscribe('Courses', { name: this.params.name }),
+      subs.subscribe('Subjects', { course_name: this.params.name }),
+      subs.subscribe('Attendances', { course_name: this.params.name })
     ]
   },
   layoutTemplate: 'layout',
@@ -66,18 +77,14 @@ Router.route('/clases/:name', {
     if (this.ready()) {
       studentsTabRendered = false
       attendancesTabRendered = false
-      var name = underscoresToSpaces(this.params.name)
+      var name = dashesToSpaces(this.params.name)
       Session.set('main_title', name)
       var course = Courses.findOne({ name: name })
       return course
     }
   },
   action: function() {
-    if (isStudent()) {
-      this.render('wrapped_subjects_collection')
-    } else {
-      this.render('course_item')
-    }
+    this.render(isStudent() ? 'wrapped_subjects_collection' : 'course_item')
   }
 })
 
@@ -86,15 +93,13 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', 
   template: 'exam_item',
   waitOn: function() {
     return [
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams')
+      subs.subscribe('Exams', { title: this.params.exam_title })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = getExam(this.params)
+      var exam = Exams.findOne() // there will be only 1 published exam
       Session.set('main_title', exam.title)
       return { exam: exam }
     }
@@ -106,18 +111,15 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/no
   template: 'exam_scores',
   waitOn: function() {
     return [
-      subs.subscribe('Users'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams'),
-      subs.subscribe('ExamScores')
+      subs.subscribe('Users', { course_name: this.params.course_name }),
+      subs.subscribe('Exams', { title: this.params.exam_title }),
+      subs.subscribe('ExamScores', { exam_title: this.params.exam_title })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = getExam(this.params)
+      var exam = Exams.findOne()
       Session.set('main_title', exam.title)
       return { exam_id: exam._id }
     }
@@ -130,55 +132,30 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   template: 'subject_item',
   waitOn: function() {
     return [
-      subs.subscribe('Courses'),
-      subs.subscribe('Subjects'),
-      subs.subscribe('Exams'),
-      subs.subscribe('Resources'),
-      subs.subscribe('ScoreCardSubjects'),
-      subs.subscribe('PeriodsScores'),
-      subs.subscribe('ExamScores')
+      subs.subscribe('Subjects', { name: this.params.subject_name }),
+      subs.subscribe('Exams', { subject_name: this.params.subject_name }),
+      subs.subscribe('Resources', { subject_name: this.params.subject_name }),
+      subs.subscribe('ScoreCardSubjects', { subject_name: this.params.subject_name }),
+      subs.subscribe('PeriodsScoresForSubject', { subject_name: this.params.subject_name} ),
+      subs.subscribe('ExamScoresForSubject', { subject_name: this.params.subject_name} )
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var subject = getSubject(this.params)
+      var subject = Subjects.findOne()
       Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }
   }
 })
 
-function getSubject(params) {
-  var course_name = underscoresToSpaces(params.course_name)
-  var subject_name = underscoresToSpaces(params.subject_name)
-
-  var clazz = Courses.findOne({ name: course_name})
-  return Subjects.findOne({ name: subject_name, course_id: clazz._id })
-}
-
-
-function getExam(params) {
-  var subject = getSubject(params)
-  var exam_title = underscoresToSpaces(params.exam_title)
-  return Exams.findOne({ subject_id: subject._id, title: exam_title })
-}
-
 Router.configure({
-  loadingTemplate: 'loading'
+  loadingTemplate: 'loading',
+  waitOn: function() {
+    return [
+      subs.subscribe('Users', { _id: Meteor.userId() }) //to always have the current user's profile data
+    ]
+  }
 })
 
-function subscriptions() {
-  return [
-    subs.subscribe('Users'),
-    subs.subscribe('Subjects'),
-    subs.subscribe('attendances_for_student'),
-    subs.subscribe('Exams'),
-    subs.subscribe('Courses'),
-    subs.subscribe('ScoreCards'),
-    subs.subscribe('Resources'),
-    subs.subscribe('ScoreCardSubjects'),
-    subs.subscribe('PeriodsScores'),
-    subs.subscribe('ExamScores')
-  ]
-}

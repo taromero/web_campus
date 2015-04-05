@@ -1,9 +1,9 @@
 Seed = {
   all: function() {
-    createStudents()
     createAdmin('teacher')
-    createAdmin('directive')
     createSubjects()
+    createStudents()
+    createAdmin('directive')
 
     function createAdmin(role) {
       console.log('Seeding', role)
@@ -21,6 +21,7 @@ Seed = {
         Meteor.users.update(user_id, { $set: {
           'profile.firstName': row.nombre,
           'profile.lastName': row.apellido,
+          'profile.document_id': row.dni,
           'profile.phoneNumber': row.telefono
         }})
       }
@@ -48,6 +49,7 @@ Seed = {
             course_id: course_id,
             'profile.firstName': row.nombre,
             'profile.lastName': row.apellido,
+            'profile.document_id': row.dni,
             'profile.phoneNumber': row.telefono
           }})
         }

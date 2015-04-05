@@ -38,8 +38,8 @@
 
 <template name='header_links'>
   <li><a href="/">Home</a></li>
-  <li {{hideIf adminAllowed}}><a href="/asistencias">Asistencias</a></li>
-  <li {{hideIf adminAllowed}}><a href="/boletin">Boletin</a></li>
+  <li {{hideIf adminAllowed}}><a href="/asistencias/{{user.profile.document_id}}">Asistencias</a></li>
+  <li {{hideIf adminAllowed}}><a href="/boletin/{{user.profile.document_id}}">Boletin</a></li>
   <li><a href="" id='sign-out'>Salir</a></li>
 </template>
 
