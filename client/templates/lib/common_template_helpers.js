@@ -42,6 +42,10 @@ Template.registerHelper('currentPath', function() {
   return Iron.Location.get().path
 })
 
+Template.registerHelper('user', function() {
+  return Meteor.user()
+})
+
 initializeTabs = function(template) {
   // Workaround to avoid run condition between meteor and materialize
   // unbind and bind to prevent multiple bindings to the same event handler

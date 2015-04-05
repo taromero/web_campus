@@ -2,9 +2,6 @@ RoleAbilities.apply = function() {
   // applies ability filters defined on each role's ability
   Collections.forEach(function(collection) {
     collection.before.anyFind(function(userId, selector) {
-      if (!userId) {
-        console.error('Error tratando de buscar ' + collection.name + '. Necesitas tener una session.')
-      }
       selector = selector || {}
       var user = Meteor.users.findOne(userId)
       var role = getRole(userId)
@@ -17,9 +14,6 @@ RoleAbilities.apply = function() {
     })
 
     collection.before.insert(function(userId, doc) {
-      if (!userId) {
-        throw "Necesitas tener una session"
-      }
       var user = Meteor.users.findOne(userId)
       var role = getRole(userId)
       if (role == 'directive') {

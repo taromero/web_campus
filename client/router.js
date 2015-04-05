@@ -39,19 +39,26 @@ Router.route('/clases', {
   layoutTemplate: 'layout'
 })
 
-Router.route('/asistencias', {
+Router.route('/asistencias/:document_id', {
   template: 'attendances_read_only',
   waitOn: function() {
     return [
-      subs.subscribe('Attendances', { student_id: Meteor.userId() })
+      subs.subscribe('Attendances', { document_id: this.params.document_id })
     ]
   },
   layoutTemplate: 'layout'
 })
 
-Router.route('/boletin', {
+Router.route('/boletin/:document_id', {
   template: 'score_card',
-  // waitOn: subscriptions,
+  waitOn: function() {
+    return [
+      subs.subscribe('ScoreCards', { document_id: this.params.document_id }),
+      subs.subscribe('ScoreCardSubjectsForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('PeriodsScoresForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('SubjectsForStudent', { document_id: this.params.document_id })
+    ]
+  },
   layoutTemplate: 'layout'
 })
 
@@ -144,6 +151,11 @@ Router.route('/clases/:course_name/materias/:subject_name', {
 })
 
 Router.configure({
-  loadingTemplate: 'loading'
+  loadingTemplate: 'loading',
+  waitOn: function() {
+    return [
+      subs.subscribe('Users', { _id: Meteor.userId() }) //to always have the current user's profile data
+    ]
+  }
 })
 

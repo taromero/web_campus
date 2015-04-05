@@ -1,9 +1,9 @@
 Seed = {
   all: function() {
-    createStudents()
     createAdmin('teacher')
-    createAdmin('directive')
     createSubjects()
+    createStudents()
+    createAdmin('directive')
 
     function createAdmin(role) {
       console.log('Seeding', role)
