@@ -41,5 +41,16 @@ Template.subject_item.events({
 
 Template.subject_item.rendered = function() {
   $('ul.tabs').tabs()
+  setTimeout(fixTabSelection, 500)
+  $('.tab-header').click(updateLocationHash)
+
+  function fixTabSelection() {
+    //hack to get the tab selected
+    $('ul.tabs').tabs()
+  }
+
+  function updateLocationHash(event) {
+    history.replaceState({}, '', $(event.currentTarget).attr('href'))
+  }
 }
 
