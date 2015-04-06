@@ -116,7 +116,7 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', 
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = Exams.findOne() // there will be only 1 published exam
+      var exam = Exams.findOne({ title: this.params.exam_title })
       Session.set('main_title', exam.title)
       return { exam: exam }
     }
@@ -136,7 +136,7 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/no
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = Exams.findOne()
+      var exam = Exams.findOne({ title: this.params.exam_title })
       Session.set('main_title', exam.title)
       return { exam_id: exam._id }
     }
@@ -158,7 +158,7 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var subject = Subjects.findOne()
+      var subject = Subjects.findOne({ name: this.params.subject_name })
       Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }
