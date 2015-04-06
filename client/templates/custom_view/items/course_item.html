@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col s12">
         <ul class="tabs">
-          {{> tabHeader class='active' href="#subjects" id=_id l_label="Materias" s_label="mdi-action-class"}}
-          {{> tabHeader class='students-tab' href="#students" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
-          {{> tabHeader class='attendances-tab' href="#attendances" id=_id l_label="Asistencia" s_label="mdi-action-done-all"}}
+          {{> tabHeader href="#materias" id=_id l_label="Materias" s_label="mdi-action-class"}}
+          {{> tabHeader class='students-tab' href="#estudiantes" id=_id l_label="Alumnos" s_label="mdi-action-account-box"}}
+          {{> tabHeader class='attendances-tab' href="#asistencia" id=_id l_label="Asistencia" s_label="mdi-action-done-all"}}
         </ul>
       </div>
-      <div id="subjects{{_id}}" class="col s12"></div>
-      <div id="students{{_id}}" class="col s12 students-section"></div>
-      <div id="attendances{{_id}}" class="col s12 attendances-section"></div>
+      <div id="materias" class="col s12"></div>
+      <div id="estudiantes" class="col s12 students-section"></div>
+      <div id="asistencia" class="col s12 attendances-section"></div>
     </div>
   </div>
 </template>
