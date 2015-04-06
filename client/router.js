@@ -110,13 +110,14 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', 
   template: 'exam_item',
   waitOn: function() {
     return [
-      subs.subscribe('Exams', { title: this.params.exam_title })
+      subs.subscribe('Exams', { title: this.params.exam_title }),
+      subs.subscribe('ExamScores', { subject_name: this.params.subject_name, exam_title: this.params.exam_title })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = Exams.findOne({ title: this.params.exam_title })
+      var exam = Exams.findOne({ title: dashesToSpaces(this.params.exam_title) })
       Session.set('main_title', exam.title)
       return { exam: exam }
     }
@@ -129,16 +130,20 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/no
   waitOn: function() {
     return [
       subs.subscribe('Users', { course_name: this.params.course_name }),
-      subs.subscribe('Exams', { title: this.params.exam_title }),
-      subs.subscribe('ExamScores', { exam_title: this.params.exam_title })
+      subs.subscribe('Exams', { subject_name: this.params.subject_name, title: this.params.exam_title }),
+      subs.subscribe('ExamScores', { subject_name: this.params.subject_name, exam_title: this.params.exam_title }),
+      subs.subscribe('Courses', { name: this.params.name }),
+      subs.subscribe('Subjects', { name: this.params.subject_name })
     ]
   },
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var exam = Exams.findOne({ title: this.params.exam_title })
+      var subject = Subjects.findOne({ name: dashesToSpaces(this.params.subject_name) })
+      var exam = Exams.findOne({ subject_id: subject._id, title: dashesToSpaces(this.params.exam_title) })
+      var course = Courses.findOne({ name: dashesToSpaces(this.params.course_name) })
       Session.set('main_title', exam.title)
-      return { exam_id: exam._id }
+      return { exam_id: exam._id, course_id: course._id }
     }
   }
 })
@@ -151,6 +156,7 @@ Router.route('/clases/:course_name/materias/:subject_name', {
     return [
       subs.subscribe('Subjects', { name: this.params.subject_name }),
       subs.subscribe('Exams', { subject_name: this.params.subject_name }),
+      subs.subscribe('ExamScores', { subject_name: this.params.subject_name }),
       subs.subscribe('Resources', { subject_name: this.params.subject_name }),
       subs.subscribe('ExamScoresForSubject', { subject_name: this.params.subject_name} )
     ]
@@ -158,7 +164,7 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   layoutTemplate: 'layout',
   data: function() {
     if (this.ready()) {
-      var subject = Subjects.findOne({ name: this.params.subject_name })
+      var subject = Subjects.findOne({ name: dashesToSpaces(this.params.subject_name) })
       Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }

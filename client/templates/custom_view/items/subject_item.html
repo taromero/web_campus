@@ -15,6 +15,11 @@
             <a href="{{currentPath}}/examenes/{{spacesForUnderscores title}}" class="collection-item push-right navigate-right">
                 <i class="mdi-content-content-paste"></i>
                 <span>{{title}}</span>
+                {{#unless adminAllowed}}
+                  {{#if scoreFor _id}}
+                    <span class="new badge">{{scoreFor _id}}</span>
+                  {{/if}}
+                {{/unless}}
                 <div class='icon icon-right-nav right'></div>
               </a>
             {{/each}}

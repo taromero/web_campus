@@ -1,7 +1,7 @@
 Template.exam_scores.helpers({
   students: function() {
     that = this
-    return Meteor.users.find().map(addExamScore)
+    return Meteor.users.find({ course_id: this.course_id }).map(addExamScore)
 
     function addExamScore(student) {
       var examScore = ExamScores.findOne({ exam_id: that.exam_id, student_id: student._id })

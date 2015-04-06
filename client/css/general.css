@@ -31,3 +31,15 @@
   display: none;
 }
 
+span.badge.new {
+  font-weight: inherit !important;
+  font-size: inherit !important;
+}
+
+span.badge.new:after {
+  content: "" !important;
+}
+
+span.badge {
+  right: 4rem !important;
+}

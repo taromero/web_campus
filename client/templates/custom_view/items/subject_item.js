@@ -12,6 +12,10 @@ Template.subject_item.helpers({
     return {
       class: 'col s12' + (isAdmin ? 'm6' : '')
     }
+  },
+  scoreFor: function(exam_id) {
+    var exam_score = ExamScores.findOne({ exam_id: exam_id, student_id: Meteor.userId() })
+    return exam_score && exam_score.score
   }
 })
 
