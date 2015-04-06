@@ -1,0 +1,40 @@
+<template name='student_item'>
+  <div class='content'>
+    {{#with student}}
+      <div class='container'>
+        <div class='row'>
+          <div class='col s12 m3'>
+            <div class='card-panel teal white-text student-detail-panel'>
+              <div class='row'>
+                <span>Email: </span>
+                <p>{{email.address}}</p>
+              </div>
+              <div class='row'>
+                <span>DNI: </span>
+                <p>{{profile.document_id}}</p>
+              </div>
+              <div class='row'>
+                <span>Nacimiento: </span>
+                <p>{{formatDate profilebirthday}}</p>
+              </div>
+              <div class='row'>
+                <span>Telefono: </span>
+                  <p>{{profile.phoneNumber}}</p>
+              </div>
+            </div>
+          </div>
+          <div class='col s12 m9'>
+            <div class="progress score-card-progress" style='display:none'>
+              <div class="indeterminate"></div>
+            </div>
+            <div class='score-card-container'>
+              {{> score_card student_id=_id}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/with}}
+    <div id='exam-score-modal-container'>
+    </div>
+  </div>
+</template>

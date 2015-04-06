@@ -6,8 +6,7 @@ Template.course_item.rendered = function() {
 Template.course_item.events({
   'click .students-tab': function(event, context) {
     if (!studentsTabRendered) {
-      Blaze.renderWithData(Template.students_accordion, { course_id: context.data._id }, $('.students-section')[0])
-      $('.students-section .collapsible').collapsible()
+      Blaze.renderWithData(Template.students_collection, { course_id: context.data._id }, $('.students-section')[0])
       studentsTabRendered = true
     }
   },

@@ -88,6 +88,23 @@ Router.route('/clases/:name', {
   }
 })
 
+Router.route('/clases/:course_name/estudiantes/:document_id', {
+  template: 'student_item',
+  layoutTemplate: 'layout',
+  waitOn: function() {
+    return [
+      subs.subscribe('Users', { document_id: this.params.document_id }),
+      subs.subscribe('ScoreCards', { document_id: this.params.document_id }),
+      subs.subscribe('ScoreCardSubjectsForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('PeriodsScoresForStudent', { document_id: this.params.document_id }),
+      subs.subscribe('SubjectsForStudent', { document_id: this.params.document_id })
+    ]
+  },
+  data: function() {
+    return { document_id: this.params.document_id }
+  }
+})
+
 Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', {
   name: 'exam_item',
   template: 'exam_item',
@@ -135,8 +152,6 @@ Router.route('/clases/:course_name/materias/:subject_name', {
       subs.subscribe('Subjects', { name: this.params.subject_name }),
       subs.subscribe('Exams', { subject_name: this.params.subject_name }),
       subs.subscribe('Resources', { subject_name: this.params.subject_name }),
-      subs.subscribe('ScoreCardSubjects', { subject_name: this.params.subject_name }),
-      subs.subscribe('PeriodsScoresForSubject', { subject_name: this.params.subject_name} ),
       subs.subscribe('ExamScoresForSubject', { subject_name: this.params.subject_name} )
     ]
   },

@@ -43,7 +43,7 @@ securePublish('PeriodsScoresForStudent', function(opts) {
   var student_id = Meteor.users.findOne({ 'profile.document_id': opts.document_id })._id
   var sc = ScoreCards.findOne({ student_id: student_id })
   var scss = ScoreCardSubjects.find({ score_card_id: sc._id })
-  return PeriodsScores.find({ score_card_subject_id: scss._id })
+  return PeriodsScores.find({ score_card_subject_id: { $in: scss.map(getIds) } })
 })
 
 securePublish('SubjectsForStudent', function(opts) {
@@ -80,7 +80,7 @@ function titleSelector(collection, opts) {
 function documentIdSelector(collection, opts) {
   var selector = {}
   if (opts.document_id) {
-    var student_id = Meteor.users.findOne({ document_id: opts.document_id })
+    var student_id = Meteor.users.findOne({ 'profile.document_id': opts.document_id })._id
     var entity = collection.findOne({ student_id: student_id })
     selector._id = entity._id
   }

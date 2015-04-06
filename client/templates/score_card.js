@@ -19,21 +19,20 @@ Template.score_card.helpers({
 })
 
 Template.score_card.events({
-  'click #update-score-card': function(event) {
+  'click #update-score-card': function(event, context) {
     var period_scores = []
-    var $base = $(event.currentTarget).closest('.table-responsive')
+    var $base = $(event.currentTarget).closest('.container')
     $base.find('.score-cell').each(function(i, sc) {
-      console.log(sc.innerText)
       period_scores.push({
         period_score_id: sc.id,
         score: sc.innerText
       })
     })
-    $base.find('.score-card-progress').show()
+    $('.score-card-progress').show()
+    $('.score-card-container').html('')
     Meteor.call('updateScoreCard', period_scores, function(err, res) {
-      var message = err ? { title: err, type: 'error' } : { title: 'Boletin actualizado!', type: 'success' }
-      swal(message)
-      $base.find('.score-card-progress').hide()
+      Blaze.renderWithData(Template.score_card, { student_id: context.data.student_id }, $('.score-card-container')[0])
+      $('.score-card-progress').hide()
     })
   }
 })

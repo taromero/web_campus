@@ -1,4 +1,4 @@
-Template.students_accordion.helpers({
+Template.students_collection.helpers({
   courseStudents: function() {
     return Meteor.users.find({ course_id: this.course_id }).fetch()
             .filter(onlyStudents)
