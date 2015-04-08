@@ -118,6 +118,9 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title', 
   data: function() {
     if (this.ready()) {
       var exam = Exams.findOne({ title: dashesToSpaces(this.params.exam_title) })
+      if (!exam) {
+        return; //prevent bug when signing out
+      }
       Session.set('main_title', exam.title)
       return { exam: exam }
     }
@@ -140,6 +143,9 @@ Router.route('clases/:course_name/materias/:subject_name/examenes/:exam_title/no
   data: function() {
     if (this.ready()) {
       var subject = Subjects.findOne({ name: dashesToSpaces(this.params.subject_name) })
+      if (!subject) {
+        return;
+      }
       var exam = Exams.findOne({ subject_id: subject._id, title: dashesToSpaces(this.params.exam_title) })
       var course = Courses.findOne({ name: dashesToSpaces(this.params.course_name) })
       Session.set('main_title', exam.title)
@@ -165,6 +171,9 @@ Router.route('/clases/:course_name/materias/:subject_name', {
   data: function() {
     if (this.ready()) {
       var subject = Subjects.findOne({ name: dashesToSpaces(this.params.subject_name) })
+      if (!subject) {
+        return;
+      }
       Session.set('main_title', subject.name)
       return { subject_id: subject._id }
     }
