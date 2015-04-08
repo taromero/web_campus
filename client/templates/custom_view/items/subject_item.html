@@ -17,8 +17,12 @@
                 <span>{{title}}</span>
                 {{#unless adminAllowed}}
                   {{#if scoreFor _id}}
-                    <span class="new badge">{{scoreFor _id}}</span>
+                    <span class="new badge {{scoreColor _id}}">{{scoreFor _id}}</span>
+                  {{else}}
+                    <span class="new badge">{{formatDate date}}</span>
                   {{/if}}
+                {{else}}
+                  <span class="new badge">{{formatDate date}}</span>
                 {{/unless}}
                 <div class='icon icon-right-nav right'></div>
               </a>

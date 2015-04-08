@@ -13,11 +13,17 @@ Template.subject_item.helpers({
       class: 'col s12' + (isAdmin ? 'm6' : '')
     }
   },
-  scoreFor: function(exam_id) {
-    var exam_score = ExamScores.findOne({ exam_id: exam_id, student_id: Meteor.userId() })
-    return exam_score && exam_score.score
+  scoreFor: scoreFor,
+  scoreColor: function(exam_id) {
+    var score = scoreFor(exam_id)
+    return score >= 7 ? 'blue lighten-2' : 'red lighten-2'
   }
 })
+
+function scoreFor(exam_id) {
+  var exam_score = ExamScores.findOne({ exam_id: exam_id, student_id: Meteor.userId() })
+  return exam_score && exam_score.score
+}
 
 Template.subject_item.events({
   'click .deleteResource': function(event) {
