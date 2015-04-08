@@ -82,7 +82,9 @@ function documentIdSelector(collection, opts) {
   if (opts.document_id) {
     var student_id = Meteor.users.findOne({ 'profile.document_id': opts.document_id })._id
     var entity = collection.findOne({ student_id: student_id })
-    selector._id = entity._id
+    if (entity) {
+      selector._id = entity._id
+    }
   }
   return selector
 }
