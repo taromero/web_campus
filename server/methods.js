@@ -57,6 +57,12 @@ Meteor.methods({
     periodScores.forEach(function(ps) {
       PeriodsScores.update(ps.period_score_id, { $set: { score: ps.score } })
     })
+  },
+  updateExam: function(exam) {
+    var id = exam._id
+    delete exam._id
+    console.log(exam)
+    Exams.update(id, { $set: exam })
   }
 })
 

@@ -43,3 +43,8 @@ span.badge.new:after {
 span.badge {
   right: 4rem !important;
 }
+
+.btn-floating.navigate-right:after, .btn-floating.push-right:after {
+  content: "" !important;
+}
+

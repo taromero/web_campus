@@ -2,7 +2,7 @@
   <div class='content'>
     {{#if adminAllowed}}
       <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a href='{{currentPath}}/notas' class="waves-effect waves-circle waves-light btn-floating btn-large red">
+        <a href='{{currentPath}}/notas' class="waves-effect waves-circle waves-light btn-floating btn-large red navigate-right">
           <i class="mdi-image-edit"></i>
         </a>
       </div>
@@ -14,19 +14,20 @@
             <div class="card-panel teal lighten-2 white-text">
               <div class='row'>
                 <span>Titulo</span>
-                <p>{{title}}</p>
+                <p contenteditable id='title'>{{title}}</p>
               </div>
               <div class='row'>
                 <span>Fecha</span>
-                <p>{{formatDate date}}</p>
+                <p contenteditable id='date'>{{formatDate date}}</p>
               </div>
               <div class='row'>
                 <span>Descripcion</span>
-                <p>{{description}}</p>
+                <p contenteditable id='description'>{{description}}</p>
               </div>
             </div>
           </div>
         </div>
+        <a class="waves-effect waves-light btn" id='update_exam'>Actualizar</a>
       </div>
     {{/with}}
   </div>
