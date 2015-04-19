@@ -1,4 +1,6 @@
 {
   "name": "Web Campus",
-  "display": "standalone"
+  "display": "standalone",
+  "gcm_sender_id": "1086595615924",
+  "gcm_user_visible_only": true
 }
