@@ -15,7 +15,7 @@ browser-policy-common@1.0.3
 browser-policy-content@1.0.4
 browser-policy-framing@1.0.4
 callback-hook@1.0.3
-canotto90:chrome-push-notifications@0.0.1
+canotto90:chrome-push-notifications@0.0.2
 canotto90:meteor-google-spreadsheet@0.2.2
 canotto90:meteor-status@1.1.1
 canotto90:velociratchet@2.1.7
